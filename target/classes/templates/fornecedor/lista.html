@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="fragments/layout :: htmlhead" th:with="title='Fornecedors'"></head>
+  <body>
+    <div th:replace="fragments/layout :: navbar">(navbar)</div>	    
+    <div class="container">
+	
+		<div class="page-header">
+			<h1>Fornecedor <small> Listagem de fornecedor</small></h1>
+		</div>	
+
+	  
+		<table class="table table-striped">
+			<tr>
+				<th>Código</th>
+				<th>Nome</th>
+			</tr>
+			<tr th:each="fornecedor : ${fornecedores}">
+				<td th:text="${fornecedor.idfornecedor}">Documento</td>
+				<td th:text="${fornecedor.nomefornecedor}">Nome</td>
+			</tr>
+		</table>        
+
+    </div>    
+	<div th:include="fragments/layout :: footer">
+	</div>
+  </body>
+</html>

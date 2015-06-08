@@ -1,0 +1,16 @@
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\model\Usuario.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\WebSecurityConfig.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\model\Cliente.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\controller\UsuarioController.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\repository\UsuarioRepository.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\model\Permissao.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\controller\ClienteController.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\App.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\controller\FornecedorController.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\repository\FornecedorRepository.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\HomeController.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\model\validator\PasswordValidator.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\repository\ClienteRepository.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\repository\PermissaoRepository.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\model\Fornecedor.java
+C:\Java\projetos\tutorial\src\main\java\br\com\adrianohardcore\SSORequestHeaderAuthenticationFilter.java
