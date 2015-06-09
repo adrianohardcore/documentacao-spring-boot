@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 
 
@@ -32,6 +33,8 @@ import org.springframework.context.annotation.Bean;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     private static PasswordEncoder encoder;
+	
+	private Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 
     @Autowired
     private UserDetailsService customUserDetailsService;
@@ -65,15 +68,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
+	
+	
+	
+	
+	
+	// @Autowired
+    // public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {				
+		// auth
+			// .inMemoryAuthentication()
+				// .withUser("user").password("user").roles("USER").and()
+				// .withUser("admin").password("admin").roles("USER", "ADMIN");				
+    // }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        if(encoder == null) {
-            encoder = new BCryptPasswordEncoder();
-        }
+    // @Bean
+    // public PasswordEncoder passwordEncoder() {
+        // if(encoder == null) {
+            // encoder = new BCryptPasswordEncoder();
+        // }
 
-        return encoder;
-    }
+        // return encoder;
+    // }
 	
 	
 }

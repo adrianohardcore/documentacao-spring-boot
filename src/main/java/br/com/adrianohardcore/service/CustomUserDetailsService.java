@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,14 +27,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional(readOnly=true)
     @Override
-    public UserDetails loadUserByUsername(final String nomeusuario)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String nomeusuario) throws UsernameNotFoundException {
 
         Usuario usuario = usuarioRepository.findByNomeusuario(nomeusuario);
         List<GrantedAuthority> authorities = buildUserAuthority(usuario.getPermissoes());
-
         return buildUserForAuthentication(usuario, authorities);
-
     }
 
     private User buildUserForAuthentication(Usuario user,

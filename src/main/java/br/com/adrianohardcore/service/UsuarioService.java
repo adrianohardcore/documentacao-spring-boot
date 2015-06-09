@@ -8,9 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.repository.UsuarioRepository;
+import br.com.adrianohardcore.config.PasswordCrypto;
 
 @Service
 public class UsuarioService {
@@ -40,8 +41,16 @@ public class UsuarioService {
     public Usuario create(Usuario form) {
         Usuario user = new Usuario();
         user = form;
+		
+		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+		user.setSenha(passwordEncoder.encodePassword(form.getSenhaForm(),null));
+		
+		
         //user.setEmail(form.getEmail());
-        user.setSenha (new BCryptPasswordEncoder().encode(form.getSenhaForm()));
+        //user.setSenha(PasswordCrypto.getInstance().encrypt(form.getSenhaForm()));
+		//(new BCryptPasswordEncoder().encode(form.getSenhaForm()));
+		//PasswordCrypto.getInstance().encrypt(password);
+		
         //user.setPermissoes(form.getPermissoes());
         return usuarioRepository.save(user);
     }

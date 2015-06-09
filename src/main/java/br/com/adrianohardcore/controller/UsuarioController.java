@@ -22,9 +22,10 @@ import br.com.adrianohardcore.model.validator.UsuarioValidator;
 import br.com.adrianohardcore.repository.PermissaoRepository;
 import br.com.adrianohardcore.repository.UsuarioRepository;
 import br.com.adrianohardcore.service.UsuarioService;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
-//@PreAuthorize("hasAuthority('USER')")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class UsuarioController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioController.class);
@@ -48,7 +49,7 @@ public class UsuarioController {
 //	public String form(Usuario usuario){	
 //		return "/usuario/form";
 //	}
-	
+
 	@RequestMapping(value = "/usuario/form", method = RequestMethod.GET)
 	public String form(Model model) {
 		model.addAttribute("usuario", new Usuario());
@@ -67,12 +68,12 @@ public class UsuarioController {
 		usuarioValidator.validate(usuario,result);		
 		
 		if (result.hasErrors())
-			return "usuario/form";
-		
-		usuarioService.create(usuario);
-		
-		return "redirect:/usuarios";
+			return "usuario/form";		
+		usuarioService.create(usuario);		
+		return "redirect:/usuarios";		
 	}	
+	
+
 	
 	@RequestMapping(value = "/userio/{id}", method = RequestMethod.DELETE)	
 	public void delete(@PathVariable("id") Long id) {
