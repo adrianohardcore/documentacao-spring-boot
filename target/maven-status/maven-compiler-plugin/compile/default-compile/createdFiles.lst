@@ -1,0 +1,2 @@
+br\com\adrianohardcore\service\CustomUserDetailsService.class
+br\com\adrianohardcore\config\PasswordCrypto.class

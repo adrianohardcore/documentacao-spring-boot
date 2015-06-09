@@ -9,27 +9,37 @@
 		
 
         
-<!-- 		<div th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
+
+ 
+ 
+		<form th:action="@{/login}" method="post" class="form-horizontal">	
+
+
+ 		<div th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
 			<div class="alert alert-danger" role="alert">
 				<span th:text="${e.global}? '*' : ${e.fieldName}" >The field name</span> |
 				<span th:text="${e.message}">The error message</span>						
 			</div>					
 		</div>
 		
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<div class="alert alert-danger" role="alert">
-				<div th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
-			</div>
-		</div>
- -->	<form th:action="@{/login}" method="post" class="form-horizontal">	 
+
+
+
+		
 			<div class="page-header">
 				<h1>Login</h1>
+			</div>
+			
+			<div th:if="${param.error} "  class="alert alert-danger">
+				Nome de usuário e senha inválida!
+			</div>
+			<div th:if="${param.logout}" class="alert alert-danger">
+				Você está desconectado!
 			</div>
  
 			<div class="form-group">
 			<label for="username" class="col-sm-2 control-label">Usuário</label>
-			<div class="col-sm-5">      	  
-			  <!-- <input type="text"  th:field="*{username}" class="form-control"/> -->
+			<div class="col-sm-5">      	  			  
 			  <input type="text" name="username" class="form-control"/>
 			</div>
 			</div>	
@@ -37,7 +47,6 @@
 			<div class="form-group">
 			<label for="password" class="col-sm-2 control-label">Senha</label>
 			<div class="col-sm-5">      	  
-			  <!-- <input type="text"  th:field="*{password}" class="form-control"/> -->
 			  <input type="password" name="password" class="form-control"/>
 			</div>
 			</div>	
