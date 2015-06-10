@@ -24,11 +24,11 @@ import br.com.adrianohardcore.repository.UsuarioRepository;
 import br.com.adrianohardcore.service.UsuarioService;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
-public class UsuarioController {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioController.class);
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
+public class UsuarioController {			   
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired    
 	public UsuarioRepository usuarioRepository;
@@ -51,25 +51,28 @@ public class UsuarioController {
 //	}
 
 	@RequestMapping(value = "/usuario/form", method = RequestMethod.GET)
-	public String form(Model model) {
+	public String form(Model model) {		
+		log.info("Formulario de cadastro de usuario");		
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/form";
 	}
 	
-//	@RequestMapping(value = "/usuario", method = RequestMethod.POST)	
-//	public String create(@Valid Usuario usuario, BindingResult result) {
-	
 	@Transactional
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST)	
-	public String create(@Valid Usuario usuario, BindingResult result) {		
-		LOGGER.debug("Salvar usuário");		
+	public String create(@Valid Usuario usuario, BindingResult result) {	
+
+		log.info("inicio gravando novo usuario");		
 		
 		UsuarioValidator usuarioValidator = new UsuarioValidator(usuarioService) ;
 		usuarioValidator.validate(usuario,result);		
 		
-		if (result.hasErrors())
+		if (result.hasErrors()){
+			log.info("Erro ao gravar novo usuario");		
 			return "usuario/form";		
+		}
+		log.info("Antes gravar usuario");		
 		usuarioService.create(usuario);		
+		log.info("Depois gravar usuario");		
 		return "redirect:/usuarios";		
 	}	
 	
@@ -91,10 +94,20 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/usuario",method = RequestMethod.PUT)
 	public String update(@ModelAttribute @Valid Usuario usuario, BindingResult result,Model model) {
-		LOGGER.debug("Atualizar usuários do formulario update");
+		//LOGGER.Logger("Atualizar usuarios do formulario update");
+		
+		log.debug("debug level log");
+		log.info("info level log");
+		log.error("error level log");
 		
 		if (usuario.getSenhaForm().isEmpty() == false){
-			LOGGER.debug("Senha: " +  usuario.getSenhaForm());
+			//LOGGER.Logger("Senha: " +  usuario.getSenhaForm());
+			
+					log.debug("debug level log");
+		log.info("info level log");
+		log.error("error level log");
+			
+			
 			UsuarioValidator usuarioValidator = new UsuarioValidator(usuarioService) ;
 			usuarioValidator.validate(usuario,result);			
 		}

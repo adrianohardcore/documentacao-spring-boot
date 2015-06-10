@@ -1,8 +1,10 @@
 package br.com.adrianohardcore.service;
 
-import br.com.adrianohardcore.model.Usuario;
-import br.com.adrianohardcore.model.Permissao;
-import br.com.adrianohardcore.repository.UsuarioRepository;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,25 +15,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import br.com.adrianohardcore.model.Permissao;
+import br.com.adrianohardcore.model.Usuario;
+import br.com.adrianohardcore.repository.UsuarioRepository;
 
 @Service
 @Qualifier("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepository userRepository;
 
     @Transactional(readOnly=true)
     @Override
-    public UserDetails loadUserByUsername(final String nomeusuario) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username)
+            throws UsernameNotFoundException {
 
-        Usuario usuario = usuarioRepository.findByNomeusuario(nomeusuario);
-        List<GrantedAuthority> authorities = buildUserAuthority(usuario.getPermissoes());
-        return buildUserForAuthentication(usuario, authorities);
+        Usuario	 user = userRepository.findByNomeusuario(username);
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getPermissoes());
+
+        return buildUserForAuthentication(user, authorities);
+
     }
 
     private User buildUserForAuthentication(Usuario user,
@@ -39,13 +44,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(user.getNomeusuario(), user.getSenha(), authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(List<Permissao> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(List<Permissao> list) {
 
-        List<GrantedAuthority> setAuths = new ArrayList(); 
+        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
         // Build user's authorities
-        for (Permissao userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getNomePermissao()));
+        for (Permissao userRole : list) {
+            setAuths.add(new SimpleGrantedAuthority(userRole.getNomePermissao() ));
         }
 
         return new ArrayList<GrantedAuthority>(setAuths);

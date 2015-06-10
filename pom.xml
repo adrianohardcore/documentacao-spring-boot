@@ -4,7 +4,7 @@
 	<groupId>br.com.adrianohardcore</groupId>
 	<artifactId>spring2</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>spring2</name>
+	<name>Documentacao</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
@@ -25,6 +25,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -78,8 +79,7 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
-			<version>2.1.1.RELEASE</version>
-		</dependency>
+			</dependency>
 
 		<dependency>
 			<groupId>org.neo4j</groupId>
@@ -99,13 +99,7 @@
 						<artifactId>springloaded</artifactId>
 						<version>1.2.1.RELEASE</version>
 					</dependency>
-				</dependencies>
-				<configuration>
-					<jvmArguments>
-						-javaagent:C:\Java\projetos\springloaded-1.2.1.RELEASE.jar
-						-noverify
-					</jvmArguments>
-				</configuration>
+				</dependencies>		
 			</plugin>
 		</plugins>
 	</build>

@@ -16,18 +16,18 @@
 					Usuário <small> Adicionar novo usuário</small>
 				</h1>
 			</div>
-<!-- 			<div th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr"> -->
-<!-- 				<div class="alert alert-danger" role="alert"> -->
-<!-- 					<span th:text="${e.global}? '*' : ${e.fieldName}">The field -->
-<!-- 						name</span> | <span th:text="${e.message}">The error message</span>    -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+<!-- 			<div th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
+				<div class="alert alert-danger" role="alert">
+					<span th:text="${e.global}? '*' : ${e.fieldName}">The field
+						name</span> | <span th:text="${e.message}">The error message</span>   
+				</div>
+			</div> -->
 
-<!-- 			<div th:if="${#fields.hasGlobalErrors()}"> -->
-<!-- 				<div class="alert alert-danger" role="alert"> -->
-<!-- 					<div th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<div class="alert alert-danger" role="alert">
+					<div th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+				</div>
+			</div>
 			<input type="hidden" th:field="*{id}"/>	
 
 

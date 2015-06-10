@@ -6,44 +6,48 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+
+import br.com.adrianohardcore.config.PasswordCrypto;
 import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.repository.UsuarioRepository;
-import br.com.adrianohardcore.config.PasswordCrypto;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UsuarioService {
 	
-    private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioService.class);
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     
 
     @Autowired
     UsuarioRepository usuarioRepository;
 
     
-    public Optional<Usuario> getUserById(long id) {
-        LOGGER.debug("Getting user={}", id);
+    public Optional<Usuario> getUserById(long id) {        
         return Optional.ofNullable(usuarioRepository.findOne(id));
     }
     
     public Optional<Usuario> getUserByEmail(String email) {
-        LOGGER.debug("Getting user by email={}", email.replaceFirst("@.*", "@***"));
+        log.info("Getting user by email={}", email.replaceFirst("@.*", "@***"));
         return usuarioRepository.findOneByEmail(email);
     }
     
     public Collection<Usuario> getAllUsers() {
-        LOGGER.debug("Getting all users");
+        log.info("Getting all users");
         return (Collection<Usuario>) usuarioRepository.findAll() ; //(new Sort("email"));
     }
     
     public Usuario create(Usuario form) {
+		log.info("Cadastrando ...");		
         Usuario user = new Usuario();
         user = form;
 		
-		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-		user.setSenha(passwordEncoder.encodePassword(form.getSenhaForm(),null));
+		//Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+		//user.setSenha(passwordEncoder.encodePassword(form.getSenhaForm(),null));
+		log.info("Senha digitada: " + form.getSenhaForm());
+		//user.setSenha(PasswordCrypto.getInstance().encrypt(form.getSenhaForm()));
+		user.setSenha(new BCryptPasswordEncoder().encode(form.getSenhaForm()));
+		log.info("Senha criptografada: " + user.getSenhaForm());
 		
 		
         //user.setEmail(form.getEmail());
