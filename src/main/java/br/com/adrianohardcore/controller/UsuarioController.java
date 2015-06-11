@@ -26,7 +26,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @Controller
-//@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ROLE_USER')")
 public class UsuarioController {			   
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	

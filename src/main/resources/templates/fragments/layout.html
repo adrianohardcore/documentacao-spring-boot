@@ -47,30 +47,30 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Início</a></li>
 
-					<!-- Menu Usuário -->
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<!-- Menu Usuário -->
+<!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false">Usuários
 							<span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/usuarios">Listar</a></li>
 							<li><a href="/usuario/form">Novo</a></li>
-						</ul></li>
+						</ul></li> -->
 
 					<!-- Menu Cliente -->
 
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false">Clientes
 							<span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="/cliente">Listar</a></li>
 							<li><a href="/cliente/form">Novo</a></li>
-						</ul></li>
+						</ul></li> -->
 
 					<!-- Menu Fornecedor -->
 
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false">Fornecedores
 							<span class="caret"></span>
 					</a>
@@ -78,13 +78,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 							<li><a href="/fornecedor">Listar</a></li>
 							<li><a href="/fornecedor/form">Novo</a></li>
 						</ul></li>
-				</ul>
+				</ul> -->
 				
-				
-<!-- 				<sec:authorize access="Authenticated"> -->
-				<div sec:authorize="hasRole('ROLE_USER')">
 
-				<div sec:authorize="isAuthenticated()" class="btn-group pull-right">
+				
+<!-- 				<!-- <div sec:authorize="#{isAuthenticated()}" class="btn-group pull-right"> -->
+<!-- 				<div sec:authorize="isAuthenticated()" class="btn-group pull-right">
 					<button type="button" class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown" aria-expanded="false">
 						<span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
@@ -92,23 +91,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 					</button>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="/logout">Sair</a></li>
-					</ul>
-				</div>
-				</div>
-				
-							<div sec:authorize="isAuthenticated()" class="btn-group pull-right">
-					<button type="button" class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" aria-expanded="false">
-						<span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="/logout">Sair</a></li>
-					</ul>
-				</div>
+					</ul> -->
+				</div> --> -->
 				
 				
-				<span th:inline="text">[[${#httpServletRequest.Headers}]]</span>
+				
+				
+				
 				
 				
 				
@@ -148,6 +137,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 		<footer class="footer">
 			<div class="container">
 				<p class="text-muted">Rodapé</p>
+
+				
+
+
+
+					
+
+					
 			</div>
 		</footer>
 	</div>
