@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      
+  <head th:include="fragments/layout :: htmlhead" th:with="title='Início'"></head>
+  <body>
+    <div th:replace="fragments/layout :: navbar">(navbar)</div>
+
+	
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Bem vindos ggg</h1>
+      </div>      
+    </div>	
+    
+	<div th:include="fragments/layout :: footer">
+	</div>
+  </body>
+</html>
