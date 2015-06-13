@@ -26,7 +26,9 @@ class HomeController {
  
     @RequestMapping("/")
     public String index(Principal principal) {
+		
         //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		//log.info("Página inicial " + user);
         log.info("Usuário " + principal);

@@ -27,7 +27,7 @@ import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.repository.UsuarioRepository;
 
 
-public class CustomUserDetails extends User implements Serializable {
+public class CustomUserDetails extends User {
 
     private long id;
     private String nome;
@@ -49,4 +49,32 @@ public class CustomUserDetails extends User implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+	
+	public String getNome() {
+		return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+	
+		public String getEmail() {
+		return email;
+    }
+
+    public void setEmail(String email) {
+        this.nome = email;
+    }
+	
+	    @Override
+    public String toString() {
+        return "Usuario " +
+                "Id:" + id + " Nome: " + nome + " Email: " + email 
+                + super.toString();
+    }
+	
+
+	
+	
+	
 }
