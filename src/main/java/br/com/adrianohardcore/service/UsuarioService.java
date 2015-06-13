@@ -39,10 +39,9 @@ public class UsuarioService {
     
     public Usuario create(Usuario form) {
 		log.info("Cadastrando ...");		
-        Usuario user = new Usuario();
-        user = form;
-		
-		//Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+        Usuario user = form;
+
+        //Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		//user.setSenha(passwordEncoder.encodePassword(form.getSenhaForm(),null));
 		log.info("Senha digitada: " + form.getSenhaForm());
 		//user.setSenha(PasswordCrypto.getInstance().encrypt(form.getSenhaForm()));

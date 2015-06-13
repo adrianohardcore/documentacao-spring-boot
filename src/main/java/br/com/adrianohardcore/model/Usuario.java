@@ -4,6 +4,7 @@ import static javax.persistence.CascadeType.PERSIST;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,16 +22,23 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @SequenceGenerator(name = "INC_USUARIO", sequenceName = "GEN_USUARIO_ID")
 @Table(name = "USUARIO")
-public class Usuario implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Usuario {
+
+
+    public Usuario() {
+        // copy fields from user
+    }
+
+
+    private static final long serialVersionUID = -7060154441729348386L;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_USUARIO")
@@ -61,10 +69,17 @@ public class Usuario implements Serializable{
 	
 	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_permisao"))
 	@ManyToMany(cascade = PERSIST)
-	private List<Permissao> permissoes = new ArrayList<Permissao>(); 
-	
+	private List<Permissao> permissoes = new ArrayList<Permissao>();
 
-	public Long getId() {
+
+
+
+
+
+
+
+
+    public Long getId() {
 		return id;
 	}
 
@@ -98,9 +113,6 @@ public class Usuario implements Serializable{
 		this.permissoes = permissoes;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	public String getEmail() {
 		return email;
@@ -132,6 +144,7 @@ public class Usuario implements Serializable{
 
 	public void setConfirmSenhaForm(String confirmSenhaForm) {
 		this.confirmSenhaForm = confirmSenhaForm;
-	}	
+	}
+
 
 }

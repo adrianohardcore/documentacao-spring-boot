@@ -1,6 +1,7 @@
 
 package br.com.adrianohardcore.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,57 +27,26 @@ import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.repository.UsuarioRepository;
 
 
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetails extends User implements Serializable {
 
+    private long id;
+    private String nome;
+    private String email;
 
-	private Usuario user;
-    private List<GrantedAuthority> authorities;
-
-    public CustomUserDetails(Usuario user, List<GrantedAuthority> authorities) {
-        this.user = user;
-        this.authorities = authorities;
+    public CustomUserDetails(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities, long id, String nome, String email) {
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
     }
 
-    public Usuario getUser() {
-        return user;
+
+
+    public long getId() {
+        return id;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setId(long id) {
+        this.id = id;
     }
-
-    @Override
-    public String getPassword() {
-        return user.getSenha();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getNomeusuario();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-}    
+}

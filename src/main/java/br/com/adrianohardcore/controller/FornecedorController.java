@@ -37,7 +37,7 @@ public class FornecedorController {
 	} 
 	
 	@RequestMapping(value = "/fornecedor/form", method = RequestMethod.GET)	
-	public String form(Fornecedor fornecedor){	
+	public String form(){
 		return "/fornecedor/form";
 	}
 

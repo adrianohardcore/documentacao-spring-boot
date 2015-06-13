@@ -622,10 +622,7 @@ public class Fornecedor implements Serializable {
             return false;
         }
         Fornecedor other = (Fornecedor) object;
-        if ((this.idfornecedor == null && other.idfornecedor != null) || (this.idfornecedor != null && !this.idfornecedor.equals(other.idfornecedor))) {
-            return false;
-        }
-        return true;
+        return !((this.idfornecedor == null && other.idfornecedor != null) || (this.idfornecedor != null && !this.idfornecedor.equals(other.idfornecedor)));
     }
 
     @Override

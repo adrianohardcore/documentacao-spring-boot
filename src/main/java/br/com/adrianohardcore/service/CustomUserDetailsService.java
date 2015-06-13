@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import br.com.adrianohardcore.model.CustomUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +38,18 @@ public class CustomUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
 
         Usuario	 user = userRepository.findByNomeusuario(username);
+        Usuario usuario = null;
+
         List<GrantedAuthority> authorities = buildUserAuthority(user.getPermissoes());
 
         return buildUserForAuthentication(user, authorities);
 
+
+
     }
 
-    private User buildUserForAuthentication(Usuario user,
-                                            List<GrantedAuthority> authorities) {
-        return new User(user.getNomeusuario(), user.getSenha(), authorities);
+    private UserDetails buildUserForAuthentication(Usuario user,List<GrantedAuthority> authorities) {
+        return new CustomUserDetails(user.getNomeusuario(), user.getSenha(),true,true,true,true, authorities,user.getId(),user.getNome(),user.getEmail());
     }
 
     private List<GrantedAuthority> buildUserAuthority(List<Permissao> list) {

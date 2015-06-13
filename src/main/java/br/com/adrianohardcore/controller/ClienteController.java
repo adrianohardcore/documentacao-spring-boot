@@ -36,7 +36,7 @@ public class ClienteController {
 	} 
 	
 	@RequestMapping(value = "/cliente/form", method = RequestMethod.GET)	
-	public String form(Cliente cliente){	
+	public String form(){
 		return "/cliente/form";
 	}
 

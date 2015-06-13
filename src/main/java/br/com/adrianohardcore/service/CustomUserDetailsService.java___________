@@ -39,6 +39,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         Usuario	 user = userRepository.findByNomeusuario(username);
         List<GrantedAuthority> authorities = buildUserAuthority(user.getPermissoes());
 
+        String teste = "Testando";
+
         return buildUserForAuthentication(user, authorities);
 
     }

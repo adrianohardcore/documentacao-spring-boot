@@ -4,6 +4,7 @@ package br.com.adrianohardcore.controller;
 
 import javax.validation.Valid;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class UsuarioController {
 	public PermissaoRepository permissaoRepository;
 	
  	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)	
-	public String lista(Model model){		
+	public String lista(Model model){
 		model.addAttribute("usuarios",usuarioRepository.findAll());
 		return "/usuario/lista";
 	} 
@@ -51,8 +52,8 @@ public class UsuarioController {
 //	}
 
 	@RequestMapping(value = "/usuario/form", method = RequestMethod.GET)
-	public String form(Model model) {		
-		log.info("Formulario de cadastro de usuario");		
+	public String form(Model model) {
+		log.info("Formulario de cadastro de usuario");
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/form";
 	}
@@ -100,7 +101,7 @@ public class UsuarioController {
 		log.info("info level log");
 		log.error("error level log");
 		
-		if (usuario.getSenhaForm().isEmpty() == false){
+		if (!usuario.getSenhaForm().isEmpty()){
 			//LOGGER.Logger("Senha: " +  usuario.getSenhaForm());
 			
 					log.debug("debug level log");
