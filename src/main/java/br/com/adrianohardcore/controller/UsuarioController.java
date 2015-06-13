@@ -24,6 +24,10 @@ import br.com.adrianohardcore.repository.PermissaoRepository;
 import br.com.adrianohardcore.repository.UsuarioRepository;
 import br.com.adrianohardcore.service.UsuarioService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
+import java.util.NoSuchElementException;
 
 
 @Controller
@@ -41,7 +45,14 @@ public class UsuarioController {
 	public PermissaoRepository permissaoRepository;
 	
  	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)	
-	public String lista(Model model){
+	public String lista(Principal principal,Model model){
+
+		log.info("---" + principal.getName());
+
+
+
+
+
 		model.addAttribute("usuarios",usuarioRepository.findAll());
 		return "/usuario/lista";
 	} 
@@ -121,5 +132,15 @@ public class UsuarioController {
 		
 		usuarioRepository.save(usuario);
 		return "redirect:/user";
+	}
+
+
+	//@PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
+	@RequestMapping("/usuario/{id}")
+	public ModelAndView getUserPage(@PathVariable Long id) {
+		//LOGGER.info("Getting user page for user={}", id);
+		log.info("Cadastro do usuario atual");
+		return new ModelAndView("user", "user", usuarioRepository.findById(id));  //getUserById(id)
+				//.orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
 	}
 }
