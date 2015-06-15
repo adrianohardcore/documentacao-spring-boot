@@ -6,12 +6,13 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.adrianohardcore.config.PasswordCrypto;
+import br.com.adrianohardcore.model.CustomUserDetails;
 import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.repository.UsuarioRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UsuarioService {
@@ -23,8 +24,8 @@ public class UsuarioService {
     UsuarioRepository usuarioRepository;
 
     
-    public Optional<Usuario> getUserById(long id) {        
-        return Optional.ofNullable(usuarioRepository.findOne(id));
+    public Usuario getUserById(long id) {        
+        return usuarioRepository.findById(id);//Optional.ofNullable(usuarioRepository.findOne(id));
     }
     
     public Optional<Usuario> getUserByEmail(String email) {
@@ -33,7 +34,15 @@ public class UsuarioService {
     }
     
     public Collection<Usuario> getAllUsers() {
-        log.info("Getting all users");
+        log.info("Usuários cadastrados");
+        
+        
+		CustomUserDetails usuarioAtual = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.info("ID: " + usuarioAtual.getId());
+		log.info("Email: " + usuarioAtual.getEmail());
+        
+        
+        
         return (Collection<Usuario>) usuarioRepository.findAll() ; //(new Sort("email"));
     }
     
