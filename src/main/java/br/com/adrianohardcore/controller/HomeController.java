@@ -20,30 +20,31 @@ import java.util.Optional;
 
 @Controller
 class HomeController {
-	
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	// final UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
- 
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @RequestMapping("/")
     public String index(Principal principal) {
-		
-        //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		//log.info("Página inicial " + user);
-        log.info("Usuário " + principal);
+        log.info("Pagina inicial!");
         return "home";
     }
-	
+
+    @RequestMapping("/403")
+    public String unauthorized() {
+        log.info("Usuario nao autorizado!");
+        return "403";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView getLoginPage(@RequestParam Optional<String> error) {
-        log.info("Getting login page, error={}", error);
+        log.info("Entrando na pagina de login ", error);
         return new ModelAndView("login", "error", error);
-    }	
-    
-	@RequestMapping(value = "/logout")
- 	public String logoutSuccess() {
-		String message = "Logout Success!";
-		return "redirect:/login?message="+message;
-	}
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logoutSuccess() {
+        String message = "Desconectado com sucesso!";
+        log.info(message);
+        return "redirect:/login?message="+ message;
+    }
 }

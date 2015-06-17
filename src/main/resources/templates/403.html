@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-      
-  <head th:include="fragments/layout :: htmlhead" th:with="title='Início'"></head>
+  <head th:include="fragments/layout :: htmlhead" th:with="title='Acesso negado'"></head>
   <body>
     <div th:replace="fragments/layout :: navbar">(navbar)</div>
-
-	
     <!-- Begin page content -->
     <div class="container">
       <div class="page-header">
-        <h1>Bem vindos</h1>
-      </div>      
-    </div>	
-    
+        <div class="alert alert-danger" role="alert">
+          <span>Acesso Negado</span>
+        </div>
+      </div>
+      <div class="alert alert-warning" role="alert">
+        <span>Lamentamos , você não tem permissão para acessar esta área</span>
+      </div>
+    </div>
 	<div th:include="fragments/layout :: footer">
 	</div>
   </body>

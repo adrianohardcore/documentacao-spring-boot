@@ -16,55 +16,51 @@ import br.com.adrianohardcore.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-	
+
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    
+
 
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    
-    public Usuario getUserById(long id) {        
+
+    public Usuario getUserById(long id) {
         return usuarioRepository.findById(id);//Optional.ofNullable(usuarioRepository.findOne(id));
     }
-    
+
     public Optional<Usuario> getUserByEmail(String email) {
         log.info("Getting user by email={}", email.replaceFirst("@.*", "@***"));
         return usuarioRepository.findOneByEmail(email);
     }
-    
-    public Collection<Usuario> getAllUsers() {
-        log.info("Usuários cadastrados");
-        
-        
-		CustomUserDetails usuarioAtual = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		log.info("ID: " + usuarioAtual.getId());
-		log.info("Email: " + usuarioAtual.getEmail());
-        
-        
-        
-        return (Collection<Usuario>) usuarioRepository.findAll() ; //(new Sort("email"));
-    }
-    
-    public Usuario create(Usuario form) {
-		log.info("Cadastrando ...");		
-        Usuario user = form;
 
-        //Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-		//user.setSenha(passwordEncoder.encodePassword(form.getSenhaForm(),null));
-		log.info("Senha digitada: " + form.getSenhaForm());
-		//user.setSenha(PasswordCrypto.getInstance().encrypt(form.getSenhaForm()));
-		user.setSenha(new BCryptPasswordEncoder().encode(form.getSenhaForm()));
-		log.info("Senha criptografada: " + user.getSenhaForm());
-		
-		
-        //user.setEmail(form.getEmail());
-        //user.setSenha(PasswordCrypto.getInstance().encrypt(form.getSenhaForm()));
-		//(new BCryptPasswordEncoder().encode(form.getSenhaForm()));
-		//PasswordCrypto.getInstance().encrypt(password);
-		
-        //user.setPermissoes(form.getPermissoes());
+    public Collection<Usuario> getAllUsers() {
+        log.info("Usuarios cadastrados");
+
+
+        CustomUserDetails usuarioAtual = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("ID: " + usuarioAtual.getId());
+        log.info("Email: " + usuarioAtual.getEmail());
+        log.info("Permissoes: " + usuarioAtual.getAuthorities());
+
+
+        return (Collection<Usuario>) usuarioRepository.findAll(); //(new Sort("email"));
+    }
+
+    public Usuario create(Usuario form) {
+        log.info("Cadastrando ...");
+        Usuario user = form;
+        log.info("Senha digitada: " + form.getSenhaForm());
+        user.setSenha(new BCryptPasswordEncoder().encode(form.getSenhaForm()));
+        log.info("Senha criptografada: " + user.getSenhaForm());
         return usuarioRepository.save(user);
     }
 
+    public void update(Usuario usuario) {
+        if (!usuario.getSenha().isEmpty()){
+            log.debug("Atualizando a senha do usuário, com a senha " + usuario.getSenhaForm());
+            usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenhaForm()));
+        }
+        log.info("Editando usuario");
+        //usuarioRepository.save(usuario);
+    }
 }

@@ -46,120 +46,68 @@ public class UsuarioController {
 	
  	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)	
 	public String lista(Principal principal,Model model){
-
-		log.info("---" + principal.getName());
-		
-		//((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getD‌​etails()).getId();
-		//Object user =  SecurityContextHolder.getContext().getAuthentication().getDetails();
-		//UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-		//log.info("ID: " + userDetails.getEmail().toString());
-		
-		//((CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPr‌​incipal()).ge
-		
-		//CustomUserDetails usuarioAtual = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//log.info("Email: " + usuarioAtual.getEmail());
-		//usuarioAtual.ge//
-
-
-
-
-
-		//model.addAttribute("usuarios",usuarioRepository.findAll());
 		model.addAttribute("usuarios",usuarioService.getAllUsers() );
 		return "/usuario/lista";
 	} 
-	
-//	@RequestMapping(value = "/usuario/form", method = RequestMethod.GET)	
-//	public String form(Usuario usuario){	
-//		return "/usuario/form";
-//	}
 
 	@RequestMapping(value = "/usuario/form", method = RequestMethod.GET)
 	public String form(Model model) {
-		log.info("Formulario de cadastro de usuario");
+		log.info("Formulario de cadastro de novo usuario");
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/form";
 	}
-	//formUsuarioAtual
-	
+
 	@RequestMapping(value = "/usuario/editar", method = RequestMethod.GET)
 	public String formEditAtual(Model model) {
 		
 		CustomUserDetails usuarioAtual = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//log.info("Email: " + usuarioAtual.getEmail());
-		
 		Usuario usuario = usuarioService.getUserById(usuarioAtual.getId());
-		
-		
-		log.info("Formulario de cadastro de usuario");
+		log.info("Formulario de edicao de usuario");
 		model.addAttribute("usuario", usuario);
 		return "usuario/formUsuarioAtual";
 	}
 	
 	@Transactional
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST)	
-	public String create(@Valid Usuario usuario, BindingResult result) {	
-
-		log.info("inicio gravando novo usuario");		
-		
+	public String create(@Valid Usuario usuario, BindingResult result) {
+		log.info("inicio gravando novo usuario");
 		UsuarioValidator usuarioValidator = new UsuarioValidator(usuarioService) ;
-		usuarioValidator.validate(usuario,result);		
-		
+		usuarioValidator.validate(usuario,result);
 		if (result.hasErrors()){
 			log.info("Erro ao gravar novo usuario");		
 			return "usuario/form";		
 		}
-		log.info("Antes gravar usuario");		
-		usuarioService.create(usuario);		
-		log.info("Depois gravar usuario");		
+		usuarioService.create(usuario);
 		return "redirect:/usuarios";		
-	}	
-	
-
+	}
 	
 	@RequestMapping(value = "/userio/{id}", method = RequestMethod.DELETE)	
 	public void delete(@PathVariable("id") Long id) {
-			
 		usuarioRepository.delete(id);	
 	}	
 
 	@RequestMapping(value = "/usuario/{id}/form", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
-
 		modelMap.addAttribute("usuario", usuarioRepository.findOne(id));
 		modelMap.addAttribute("permissaolist", permissaoRepository.findAll());
 		return "usuario/update";
-	}	
+	}
 
-	@RequestMapping(value = "/usuario",method = RequestMethod.PUT)
-	public @ResponseBody String update(@ModelAttribute @Valid Usuario usuario, BindingResult result,Model model) {
+	@RequestMapping(value = "/usuarioEditar",method = RequestMethod.POST)
+	public String update(@ModelAttribute @Valid Usuario usuario, BindingResult result,Model model) {
 		log.debug("Atualizar usuarios do formulario update");
-
-		
 		if (!usuario.getSenhaForm().isEmpty()){
-			log.debug("Senha: " +  usuario.getSenhaForm());			
-			
+			log.debug("Senha: " +  usuario.getSenhaForm());
 			UsuarioValidator usuarioValidator = new UsuarioValidator(usuarioService) ;
 			usuarioValidator.validate(usuario,result);			
 		}
 		
-		if (result.hasErrors())  
-		{			
-			model.addAttribute("roleList", permissaoRepository.findAll());				
+		if (result.hasErrors()){
+			//model.addAttribute("roleList", permissaoRepository.findAll());
 			return "usuario/formUsuarioAtual";
 		}
-		
-		usuarioService.create(usuario);
-		return "redirect:/user";
+		log.info("Editando usuario");
+		usuarioService.update(usuario);
+		return "redirect:/usuarios";
 	}
-
-
-	//@PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
-	//@RequestMapping("/usuario/{id}")
-//	public ModelAndView getUserPage(@PathVariable Long id) {
-//		//LOGGER.info("Getting user page for user={}", id);
-//		log.info("Cadastro do usuario atual");
-//		return new ModelAndView("user", "user", usuarioRepository.findById(id));  //getUserById(id)
-//				//.orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
-//	}
 }

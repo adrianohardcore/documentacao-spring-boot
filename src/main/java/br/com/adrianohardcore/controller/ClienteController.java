@@ -4,6 +4,9 @@ package br.com.adrianohardcore.controller;
 //import org.springframework.*;
 import javax.validation.Valid;
 
+import br.com.adrianohardcore.model.Usuario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,11 +25,13 @@ import br.com.adrianohardcore.repository.ClienteRepository;
 
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ADMIN')")
 public class ClienteController {
-	
+
 	@Autowired    
 	public ClienteRepository clienteRepository;
+
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
  	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
 	//@ResponseBody 	
@@ -36,11 +41,12 @@ public class ClienteController {
 	} 
 	
 	@RequestMapping(value = "/cliente/form", method = RequestMethod.GET)	
-	public String form(){
+	public String form(Model model){
+		log.info("Formulario de cadastro de cliente");
+		model.addAttribute("cliente", new Cliente());
 		return "/cliente/form";
 	}
 
-	
 /*     @RequestMapping(value="/cliente/form", method=RequestMethod.POST)
     public String formSave(@ModelAttribute Cliente cliente, Model model) {
         clienteRepository.save(cliente);

@@ -25,9 +25,6 @@ import javax.validation.constraints.Size;
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-//    @Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 18)
     @Column(name = "DOCTOCLIENTE")
     private String doctocliente;
 

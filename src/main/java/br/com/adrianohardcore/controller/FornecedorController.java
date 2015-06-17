@@ -3,6 +3,9 @@ package br.com.adrianohardcore.controller;
 
 import javax.validation.Valid;
 
+import br.com.adrianohardcore.model.Cliente;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,7 @@ import br.com.adrianohardcore.repository.FornecedorRepository;
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class FornecedorController {
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired    
 	public FornecedorRepository fornecedorRepository;
@@ -34,10 +38,12 @@ public class FornecedorController {
 	public String lista(Model model){		
 		model.addAttribute("fornecedores",fornecedorRepository.findAll());
 		return "/fornecedor/lista";
-	} 
-	
-	@RequestMapping(value = "/fornecedor/form", method = RequestMethod.GET)	
-	public String form(){
+	}
+
+	@RequestMapping(value = "/fornecedor/form", method = RequestMethod.GET)
+	public String form(Model model){
+		log.info("Formulario de cadastro de fornecedor");
+		model.addAttribute("fornecedor", new Cliente());
 		return "/fornecedor/form";
 	}
 

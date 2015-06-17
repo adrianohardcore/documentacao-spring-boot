@@ -18,35 +18,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	private static PasswordEncoder encoder;
+
+    private static PasswordEncoder encoder;
 
 
     @Autowired
     private UserDetailsService customUserDetailsService;
-	
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/home","/login","/usuario/form","/usuario").permitAll()
-				.antMatchers("/hello/**").hasRole("ADMIN")				
-				.antMatchers("/webjars/**").permitAll()
+                .antMatchers("/hello/**").hasRole("ADMIN")
+                .antMatchers("/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
-            .logout()
-            	.logoutUrl("/logout")
-            	.logoutSuccessUrl("/")
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
                 .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
-        
+
     }
-	
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(encoder());
@@ -59,12 +59,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // @Bean
     // public PasswordEncoder passwordEncoder() {
-        // if(encoder == null) {
-            // encoder = new BCryptPasswordEncoder();
-        // }
-
-        // return encoder;
+    // if(encoder == null) {
+    // encoder = new BCryptPasswordEncoder();
     // }
-	
-	
+
+    // return encoder;
+    // }
+
+
 }
