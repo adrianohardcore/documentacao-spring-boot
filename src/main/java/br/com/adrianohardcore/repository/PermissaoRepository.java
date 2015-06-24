@@ -1,11 +1,20 @@
 package br.com.adrianohardcore.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import br.com.adrianohardcore.model.Permissao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.adrianohardcore.model.Usuario;
 
-@Repository
-public interface PermissaoRepository extends CrudRepository<Usuario, Long>{
+import java.util.List;
+
+
+public interface PermissaoRepository extends JpaRepository<Permissao, Long> {
+
+    Permissao findByNomePermissao(String user);
+
+
+    //List<Permissao> findByNomePermissao(String user);
 
 }

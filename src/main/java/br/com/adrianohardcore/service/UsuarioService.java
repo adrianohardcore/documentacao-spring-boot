@@ -1,8 +1,14 @@
 package br.com.adrianohardcore.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
+import br.com.adrianohardcore.model.Permissao;
+import br.com.adrianohardcore.model.Permissao;
+import br.com.adrianohardcore.model.validator.UsuarioValidator;
+import br.com.adrianohardcore.repository.PermissaoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +29,9 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    PermissaoRepository permissaoRepository;
+
 
     public Usuario getUserById(long id) {
         return usuarioRepository.findById(id);//Optional.ofNullable(usuarioRepository.findOne(id));
@@ -33,7 +42,7 @@ public class UsuarioService {
         return usuarioRepository.findOneByEmail(email);
     }
 
-    public Collection<Usuario> getAllUsers() {
+    public List<Usuario> getAllUsers() {
         log.info("Usuarios cadastrados");
 
 
@@ -43,24 +52,64 @@ public class UsuarioService {
         log.info("Permissoes: " + usuarioAtual.getAuthorities());
 
 
-        return (Collection<Usuario>) usuarioRepository.findAll(); //(new Sort("email"));
+        return usuarioRepository.findAll();
     }
 
     public Usuario create(Usuario form) {
         log.info("Cadastrando ...");
         Usuario user = form;
+
+        log.info("Permissão encontrada: " + permissaoRepository.findByNomePermissao("USER"));
+        Permissao permissao = permissaoRepository.findByNomePermissao("USER");
+
+        if (permissao == null) {
+            permissao = new Permissao();
+            permissao.setNomePermissao("USER");
+        }
+        List<Permissao> permissoes = new ArrayList();
+        permissoes.add(permissao);
+        user.setPermissoes(permissoes);
+
         log.info("Senha digitada: " + form.getSenhaForm());
         user.setSenha(new BCryptPasswordEncoder().encode(form.getSenhaForm()));
         log.info("Senha criptografada: " + user.getSenhaForm());
         return usuarioRepository.save(user);
     }
 
-    public void update(Usuario usuario) {
-        if (!usuario.getSenha().isEmpty()){
-            log.debug("Atualizando a senha do usuário, com a senha " + usuario.getSenhaForm());
-            usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenhaForm()));
+    public void update(Usuario usuarioForm ) {
+        Usuario usuario = usuarioRepository.findById(usuarioForm.getId());
+        usuario.setEmail(usuarioForm.getEmail());
+        usuario.setNomeusuario(usuarioForm.getNomeusuario());
+        usuario.setNome(usuarioForm.getNome());
+
+
+
+        for (Permissao permissoes : usuario.getPermissoes()) {
+            log.info("Permissao " + permissoes.getNomePermissao());
         }
-        log.info("Editando usuario");
-        //usuarioRepository.save(usuario);
+
+
+        log.info("Senha " + usuarioForm.getSenhaForm());
+
+        if (!usuarioForm.getSenhaForm().trim().isEmpty()){
+            log.info("Atualizando a senha do usuario, com a senha " + usuarioForm.getSenhaForm());
+            usuario.setSenha(new BCryptPasswordEncoder().encode(usuarioForm.getSenhaForm()));
+        }
+
+        log.info("Editando usuario " + usuario.getNome());
+        usuarioRepository.saveAndFlush(usuario);
+    }
+
+    public Long getIdByEmail(String email) {
+        return usuarioRepository.findByEmail(email).getId();
+    }
+
+
+    public Optional<Usuario> getUsuarioByNomeusuario(String nomeusuario) {
+        return usuarioRepository.findOneByNomeusuario(nomeusuario);
+    }
+
+    public Long getIdByNomeusuario(String nomeusuario) {
+        return usuarioRepository.findByNomeusuario(nomeusuario).getId();
     }
 }

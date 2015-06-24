@@ -4,21 +4,28 @@
     <div th:replace="fragments/layout :: navbar">(navbar)</div>	    
     <div class="container">
 
+		<div class="page-header">
+			<h1>
+				Usuários <small> Lista de usuários cadastrados 999</small>
+			</h1>
+		</div>
+
 	  
 		<table class="table table-striped">
 			<tr>
+				<th>ID</th>
 				<th>Nome</th>
 				<th>Usuário</th>
 				<th>Email</th>	
 					
 			</tr>
 			<tr th:each="usuario : ${usuarios}">
+				<td th:text="${usuario.id}">ID</td>
 				<td th:text="${usuario.nome}">Documento</td>
 				<td th:text="${usuario.nomeusuario}">Usuário</td>
 				<td th:text="${usuario.email}">Email</td>
 			</tr>
-		</table>        
-
+		</table>
     </div>    
 	<div th:include="fragments/layout :: footer">
 	</div>

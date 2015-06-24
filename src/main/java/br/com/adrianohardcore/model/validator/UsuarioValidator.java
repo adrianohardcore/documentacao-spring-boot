@@ -15,38 +15,44 @@ import br.com.adrianohardcore.service.UsuarioService;
 @Component
 public class UsuarioValidator implements Validator {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioValidator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioValidator.class);
 
-	private final UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
-	@Autowired
-	public UsuarioValidator(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
-	}
+    @Autowired
+    public UsuarioValidator(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
-	@Autowired
-	UsuarioRepository usuarioRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
-	@Override
-	public boolean supports(Class<?> clazz) {		
-		return Usuario.class.isAssignableFrom(clazz);
-	}
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Usuario.class.isAssignableFrom(clazz);
+    }
 
-	@Override
-	public void validate(Object target, Errors errors) {
-		LOGGER.debug("Validating {}", target);
+    @Override
+    public void validate(Object target, Errors errors) {
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senhaForm", "required","Senha vazia");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmSenhaForm", "required","Confirmação de senha vazia");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senhaForm", "required", "Senha vazia");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmSenhaForm", "required", "Confirmação de senha vazia");
 
-		Usuario usuario = (Usuario) target;
+        Usuario usuario = (Usuario) target;
 
-		if (!(usuario.getSenhaForm().equals(usuario.getConfirmSenhaForm()))) {
-			errors.rejectValue("senhaForm", "notmatch", "Comfirmação de senha não combina com a senha");
-		}
+        if (!(usuario.getSenhaForm().equals(usuario.getConfirmSenhaForm()))) {
+            errors.rejectValue("senhaForm", "notmatch", "Comfirmação de senha não combina com a senha");
+        }
 
-		if (usuarioService.getUserByEmail(usuario.getEmail()).isPresent()) {
-			errors.reject("email", "Este email já está sendo usado");
-		}
-	}
+        if (usuarioService.getUserByEmail(usuario.getEmail()).isPresent() && usuario.getId() != usuarioService.getIdByEmail(usuario.getEmail())) {
+            errors.reject("email", "Este email já está sendo usado");
+        }
+
+        if (usuarioService.getUsuarioByNomeusuario(usuario.getNomeusuario()).isPresent() && usuario.getId() != usuarioService.getIdByNomeusuario(usuario.getNomeusuario()))
+        {
+            errors.reject("nomeusuario", "Este usuário já está sendo usado");
+        }
+
+    }
 }
+
