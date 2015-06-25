@@ -16,7 +16,8 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Usuário</th>
-				<th>Email</th>	
+				<th>Email</th>
+                <th>Editar</th>
 					
 			</tr>
 			<tr th:each="usuario : ${usuarios}">
@@ -24,6 +25,12 @@
 				<td th:text="${usuario.nome}">Documento</td>
 				<td th:text="${usuario.nomeusuario}">Usuário</td>
 				<td th:text="${usuario.email}">Email</td>
+                <td>
+
+
+                    <a th:href="@{|/usuario/${usuario.id}/form|}">Editar</a>
+
+                </td>
 			</tr>
 		</table>
     </div>    

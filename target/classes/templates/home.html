@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-      
-  <head th:include="fragments/layout :: htmlhead" th:with="title='Início'"></head>
-  <body>
-    <div th:replace="fragments/layout :: navbar">(navbar)</div>
 
-	
-    <!-- Begin page content -->
-    <div class="container">
-      <div class="page-header">
+<head th:include="fragments/layout :: htmlhead" th:with="title='Início'">
+    <script src="/js/app.js"></script>
+
+
+</head>
+<body>
+
+<div th:replace="fragments/layout :: navbar">(navbar)</div>
+
+
+<!-- Begin page content -->
+<div class="container">
+    <div class="page-header">
         <h1>Bem vindos</h1>
-      </div>      
-    </div>	
-    
-	<div th:include="fragments/layout :: footer">
-	</div>
-  </body>
+    </div>
+
+
+    <div ng-app="angularjs-starter" ng-controller="MainCtrl">
+        <fieldset data-ng-repeat="choice in choices">
+            <select>
+                <option>Mobile</option>
+                <option>Office</option>
+                <option>Home</option>
+            </select>
+            <input type="text" ng-model="choice.name" name="" placeholder="Enter mobile number"/>
+            <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+        </fieldset>
+        <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+
+        <div id="choicesDisplay">
+            {{ choices }}
+        </div>
+    </div>
+
+</div>
+
+<div th:include="fragments/layout :: footer">
+</div>
+<script th:src="@{/js/app.js}"></script>
+</body>
 </html>

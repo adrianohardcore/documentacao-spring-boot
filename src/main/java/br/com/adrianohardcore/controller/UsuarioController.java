@@ -67,10 +67,21 @@ public class UsuarioController {
 
 		log.info("Formulario de edicao de usuario");
 		model.addAttribute("usuario", usuario);
-        //model.addAttribute("permissao",permissaoRepository.findAll());
 		return "usuario/formUsuarioAtual";
 	}
-	
+
+//    @RequestMapping(value = "/usuario/{id}/editar", method = RequestMethod.GET)
+//    public String formEdit(Usuario usuario,Model model) {
+//
+//        log.info("Formulario de edicao de usuario");
+//
+//
+//        usuarioService.getUserById(id);
+//        model.addAttribute("usuario", usuario);
+//        return "usuario/formUsuarioAtual";
+//    }
+
+
 	@Transactional
     @PreAuthorize("true")
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST)	
@@ -86,16 +97,13 @@ public class UsuarioController {
 		return "redirect:/usuarios";		
 	}
 	
-	@RequestMapping(value = "/userio/{id}", method = RequestMethod.DELETE)	
-	public void delete(@PathVariable("id") Long id) {
-		usuarioRepository.delete(id);	
-	}	
+
 
 	@RequestMapping(value = "/usuario/{id}/form", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
 		modelMap.addAttribute("usuario", usuarioRepository.findOne(id));
 		modelMap.addAttribute("permissaolist", permissaoRepository.findAll());
-		return "usuario/update";
+		return "usuario/formEditar";
 	}
 
 	@RequestMapping(value = "/usuarioEditar",method = RequestMethod.POST)
