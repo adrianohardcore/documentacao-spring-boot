@@ -1,3 +1,5 @@
 br\com\adrianohardcore\service\CustomUserDetailsService.class
+br\com\adrianohardcore\service\PermissaoService.class
+br\com\adrianohardcore\controller\PermissaoController.class
 br\com\adrianohardcore\model\CustomUserDetails.class
 br\com\adrianohardcore\config\PasswordCrypto.class

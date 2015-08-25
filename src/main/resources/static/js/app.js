@@ -1,13 +1,44 @@
-/* -------------------------------------------------------
+angular.module('hqApp', [])
+.factory('hqService', ['$http', function($http) {
 
-* Filename:     Adding Form Fields Dynamically
-* Website:      http://www.shanidkv.com
-* Description:  Shanidkv AngularJS blog
-* Author:       Muhammed Shanid shanidkannur@gmail.com
+    function listar(callback) {
+        $http({
+            method:'GET',
+            url:'/permissoes/'
+        }).success(function (data) {
+            if (callback) callback(data)
+        });
+    }
 
----------------------------------------------------------*/
+    function salvar(hq, callback) {
+        $http({
+            method:'POST',
+            url:'/permissao/salvar',
+            data:JSON.stringify(permissao)
+        }).success(function (data) {
+            if (callback) callback(data)
+        });
+    }
 
-var app = angular.module('angularjs-starter', []);
+    return {
+        listar:listar,
+        salvar:salvar
+    };
+}])
+.controller('hqCtrl', ['$scope', 'hqService',function($scope, hqService) {
+
+    hqService.listar(function(hqs) {
+        $scope.hqs = hqs;
+    });
+
+    $scope.salvar = function(hq) {
+        hqService.salvar(hq, function(hq) {
+            $scope.hqs.push(hq);
+        });
+    }
+}]);
+
+/* var app = angular.module('angularjs-starter', []);
 
   app.controller('MainCtrl', function($scope) {
 
@@ -23,4 +54,4 @@ var app = angular.module('angularjs-starter', []);
     $scope.choices.splice(lastItem);
   };
 
-});
+}); */
