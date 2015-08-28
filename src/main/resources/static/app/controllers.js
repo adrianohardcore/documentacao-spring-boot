@@ -1,15 +1,16 @@
 (function(angular) {
   var AppController = function($scope, Permissao) {
+	  
     Permissao.query(function(response) {
-      $scope.permissaos = response ? response : [];
+      $scope.permissoes = response ? response : [];
     });
     
-    $scope.addPermissao = function(description) {
+    $scope.addPermissao = function(nomePermissao) {
       new Permissao({
-        description: description,
+        nomePermissao: nomePermissao,
         checked: false
       }).$save(function(permissao) {
-        $scope.permissaos.push(permissao);
+        $scope.permissoes.push(permissao);
       });
       $scope.newPermissao = "";
     };
@@ -20,7 +21,7 @@
     
     $scope.deletePermissao = function(permissao) {
       permissao.$remove(function() {
-        $scope.permissaos.splice($scope.permissaos.indexOf(permissao), 1);
+        $scope.permissoes.splice($scope.permissoes.indexOf(permissao), 1);
       });
     };
   };
