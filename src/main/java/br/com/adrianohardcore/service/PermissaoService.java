@@ -1,24 +1,14 @@
 package br.com.adrianohardcore.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-
 import br.com.adrianohardcore.model.Permissao;
-import br.com.adrianohardcore.model.Permissao;
-
 import br.com.adrianohardcore.repository.PermissaoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.adrianohardcore.model.CustomUserDetails;
-import br.com.adrianohardcore.model.Permissao;
-import br.com.adrianohardcore.repository.PermissaoRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PermissaoService {

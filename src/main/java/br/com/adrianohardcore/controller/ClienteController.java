@@ -1,47 +1,30 @@
 package br.com.adrianohardcore.controller;
 
 
-import java.security.Principal;
-
-import javax.validation.Valid;
-
-import java.util.List;
+import br.com.adrianohardcore.model.Cliente;
+import br.com.adrianohardcore.repository.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.core.annotation.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import br.com.adrianohardcore.model.CustomUserDetails;
-import br.com.adrianohardcore.repository.ClienteRepository;
-import br.com.adrianohardcore.model.Cliente;
-import br.com.adrianohardcore.*;
-
-import br.com.adrianohardcore.repository.PermissaoRepository;
-import br.com.adrianohardcore.repository.PermissaoRepository;
-import br.com.adrianohardcore.service.PermissaoService;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import java.util.*; 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 
-
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -54,16 +37,44 @@ public class ClienteController {
 	@Autowired    
 	public ClienteRepository repo;
 
-	@RequestMapping(value = "/cliente", method = RequestMethod.GET)  
+	@RequestMapping(value = "/clientelista", method = RequestMethod.GET)
 	public String index() {
 		log.info("Pagina inicial cliente!");
 		return "/cliente/index"; 
-	} 	
+	}
+
+    private Integer page = 0;
+    private Integer pageTotal = 0;
  
-	@RequestMapping(value = "/clientes",method = RequestMethod.GET)
+	@RequestMapping(value = "/clientes",method = RequestMethod.GET , produces= MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Cliente> findItems() {
-		return repo.findAll();
+		String sord = "nomecliente";
+		String sidx = "ASC";
+		page++;
+		Integer rows = 50;
+
+
+		//Order order = new Order(Direction.fromString(sord.toLowerCase()),sidx);
+		Sort sort = new Sort(sord);
+		//Pageable pageRequest = new PageRequest(page - 1, rows, sort);
+        Pageable pageRequest = new PageRequest(page - 1, rows, sort);
+		Page<Cliente> clientes = repo.findAll(pageRequest);
+		//Map<String,Object> modelMap = new HashMap<String,Object>();
+
+
+        if (page >= clientes.getTotalPages() ){
+            page = 1;
+        }
+
+
+        log.info("page: " + page.toString() + " rows: " + rows.toString() + " totalPages: " + clientes.getTotalPages() + " totalRows: " + clientes.getTotalElements()     );
+
+
+
+		//List<Cliente> clientes = repo.findAll();
+		//return clientes.getContent();
+        return repo.findAll();
 	}
 
 	@RequestMapping(value = "/clientes",method = RequestMethod.POST)

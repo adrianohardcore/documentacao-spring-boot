@@ -1,10 +1,5 @@
 package br.com.adrianohardcore.controller;
 
-import java.util.NoSuchElementException;
-
-import javax.naming.NoPermissionException;
-import javax.servlet.http.HttpServletRequest;
-
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +8,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.naming.NoPermissionException;
+import javax.servlet.http.HttpServletRequest;
+import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {

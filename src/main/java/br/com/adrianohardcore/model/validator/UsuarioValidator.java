@@ -1,5 +1,8 @@
 package br.com.adrianohardcore.model.validator;
 
+import br.com.adrianohardcore.model.Usuario;
+import br.com.adrianohardcore.repository.UsuarioRepository;
+import br.com.adrianohardcore.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
-import br.com.adrianohardcore.model.Usuario;
-import br.com.adrianohardcore.repository.UsuarioRepository;
-import br.com.adrianohardcore.service.UsuarioService;
 
 @Component
 public class UsuarioValidator implements Validator {

@@ -1,10 +1,9 @@
 package br.com.adrianohardcore.repository;
 
-import java.util.Optional;
-
+import br.com.adrianohardcore.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.adrianohardcore.model.Usuario;
+import java.util.Optional;
 
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{

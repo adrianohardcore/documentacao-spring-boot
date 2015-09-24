@@ -1,14 +1,10 @@
 package br.com.adrianohardcore.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-
+import br.com.adrianohardcore.model.CustomUserDetails;
 import br.com.adrianohardcore.model.Permissao;
-import br.com.adrianohardcore.model.Permissao;
-import br.com.adrianohardcore.model.validator.UsuarioValidator;
+import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.repository.PermissaoRepository;
+import br.com.adrianohardcore.repository.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.adrianohardcore.model.CustomUserDetails;
-import br.com.adrianohardcore.model.Usuario;
-import br.com.adrianohardcore.repository.UsuarioRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static java.lang.String.*;
 
 @Service
 public class UsuarioService {
@@ -85,7 +83,7 @@ public class UsuarioService {
 
 
         for (Permissao permissoes : usuario.getPermissoes()) {
-            log.info("Permissao " + permissoes.getNomePermissao());
+            log.info(format("Permissao %s", permissoes.getNomePermissao()));
         }
 
 

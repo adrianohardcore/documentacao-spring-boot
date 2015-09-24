@@ -1,15 +1,15 @@
 package br.com.adrianohardcore.controller;
 
 
-
-import java.security.Principal;
-
-import javax.validation.Valid;
-
+import br.com.adrianohardcore.model.CustomUserDetails;
+import br.com.adrianohardcore.model.Usuario;
+import br.com.adrianohardcore.model.validator.UsuarioValidator;
+import br.com.adrianohardcore.repository.PermissaoRepository;
+import br.com.adrianohardcore.repository.UsuarioRepository;
+import br.com.adrianohardcore.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.adrianohardcore.model.CustomUserDetails;
-import br.com.adrianohardcore.model.Usuario;
-import br.com.adrianohardcore.model.validator.UsuarioValidator;
-import br.com.adrianohardcore.repository.PermissaoRepository;
-import br.com.adrianohardcore.repository.UsuarioRepository;
-import br.com.adrianohardcore.service.UsuarioService;
+import javax.validation.Valid;
+import java.security.Principal;
 
 
 @Controller
