@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:fragment="htmlhead">
@@ -9,10 +9,13 @@
     <meta name="author" content=""/>
     <!-- <link rel="icon" href="../../favicon.ico"> -->
     <!-- Bootstrap core CSS -->
+<!--
     <link
-            href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap.min.css"
-            th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"
+            href="/bower_components/bootstrap/dist/css/bootstrap.min.css"
+            th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}"
             rel="stylesheet" media="screen"/>
+-->
+    
     <!-- Custom styles for this template -->
     <link th:href="@{/css/sticky-footer-navbar.css}" rel="stylesheet"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,12 +24,24 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Bootstrap core JavaScript
-        ================================================== -->
-    <script th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
-
-    <script src="http://cdn.jsdelivr.net/webjars/angularjs/1.4.1/angular.min.js"
-            th:src="@{/webjars/angularjs/1.4.1/angular.min.js}"></script>
+        ================================================== -->    
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap-table/dist/bootstrap-table.min.css">
+   
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-touch/angular-touch.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css">
+    <!--<script src="bower_components/angular-ui-grid/ui-grid.js"></script>-->
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+    
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>      
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="/bower_components/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.js"></script>
+    <!-- put your locale files after bootstrap-table.js -->
+    <script type="text/javascript" src="/bower_components/bootstrap-table/src/locale/bootstrap-table-pt-BR.js">          </script>
 
 
     <title th:text="${title}">(title)</title>

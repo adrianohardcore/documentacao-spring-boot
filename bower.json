@@ -4,9 +4,13 @@
 		"angular": "~1.4.6",
 		"angular-resource": "~1.4.6",
 		"bootstrap-css-only": "~3.2.0",
+        "bootstrap": "~3.2.0",
 		"lodash": "~2.4.1",
-        "angular-touch": "~1.4.6",
+        "angular-touch": "~1.4.6",  
         "angular-animate": "~1.4.6",
-        "angular-ui-grid": "~3.0.6"
+        "angular-ui-grid": "~3.0.6",
+        "bootstrap-table": "~1.8.1",
+        "jquery-ui" : ""
+
 	}
 }

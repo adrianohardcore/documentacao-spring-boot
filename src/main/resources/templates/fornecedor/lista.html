@@ -1,14 +1,91 @@
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="fragments/layout :: htmlhead" th:with="title='Fornecedors'"></head>
+  <head th:include="fragments/layout :: htmlhead" th:with="title='Fornecedors'">
+  </head>
+
   <body>
     <div th:replace="fragments/layout :: navbar">(navbar)</div>	    
     <div class="container">
 	
 		<div class="page-header">
 			<h1>Fornecedor <small> Listagem de fornecedor</small></h1>
-		</div>	
+	    </div>	
+		
+		<table id="table"
+               data-toggle="table"
+               data-url="/fornecedores"
+               data-height="450"
+               data-side-pagination="server"			   
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true"
+			   data-advanced-search="true"
+			   data-id-table="advancedTable"
+			   data-sort-name="nomefornecedor"
+			   >
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+				<th data-field="idfornecedor" data-sortable="true">Código fornecedor</th>
+				<th data-field="nomefornecedor" data-sortable="true">Razão Social</th>
+				<th data-field="nomefantasia" data-sortable="true">Fantasia</th>
+            </tr>
+            </thead>
+        </table>
+		
+		<script>
+    var $table = $('#table');
+    $(function () {
+    });
+</script>
+        
+        
+<!--     <table id="table"
+           data-toggle="table"
+           data-pagination="true"
+           data-search="false"
+           data-advanced-search="true"
+           data-id-table="advancedTable"
+           data-url="/fornecedores"
+		   data-sidePagination="server"
+        <thead>
+        <tr>
+            <th data-field="idfornecedor" data-sortable="true">Código fornecedor</th>
+            <th data-field="nomefornecedor" data-sortable="true">Razão Social</th>
+            <th data-field="nomefantasia" data-sortable="true">Fantasia</th>
+        </tr>
+        </thead>
+    </table>   -->      
+        
+       
 
+        
+<!--
+<table id="table-pagination" data-url="/fornecedores" data-height="400" data-pagination="true" data-search="true">
+    <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="idfornecedor" data-align="right" data-sortable="true">Código fornecedor</th>
+            <th data-field="nomefornecedor" data-align="center" data-sortable="true">Razão Social</th>
+            <th data-field="nomefantasia" data-sortable="true" data-sorter="priceSorter">Fantasia</th>
+        </tr>
+    </thead>
+</table>        
+-->
+        
+        
+<!--
+       <table data-toggle="table" data-url="/fornecedores">
+            <thead>
+                <tr>
+                    <th data-field="idfornecedor" >Código fornecedor</th>
+                    <th data-field="nomefornecedor" >Razão Social</th>
+                    <th data-field="nomefantasia" >Fantasia</th>
+                </tr>
+            </thead>
+        </table>
+-->
 	  
+<!--
 		<table class="table table-striped">
 			<tr>
 				<th>Código</th>
@@ -19,9 +96,16 @@
 				<td th:text="${fornecedor.nomefornecedor}">Nome</td>
 			</tr>
 		</table>        
+-->
 
+<!--
     </div>    
 	<div th:include="fragments/layout :: footer">
 	</div>
-  </body>
+-->
+      
+      
+
+
+  </body>    
 </html>
