@@ -22,7 +22,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
-
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.util.List;
 
 
@@ -31,6 +31,7 @@ import java.util.List;
 @ComponentScan
 @SpringBootApplication */
 @SpringBootApplication
+
 public class App {
 
 	
@@ -43,6 +44,9 @@ public class App {
 	public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
 		return new ShallowEtagHeaderFilter();
 	}
+	
+
+
 
 //	@Override
 //	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

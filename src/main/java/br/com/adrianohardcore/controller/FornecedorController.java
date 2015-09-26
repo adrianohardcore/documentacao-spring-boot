@@ -111,7 +111,7 @@ public class FornecedorController {
 		{ 
 			log.info("Pesquisando...");
 			//users = userRepository.findByNameLike("%" + search + "%",pageRequest);
-			fornecedores = fornecedorRepository.findByNomefornecedorOrNomefantasia("%" + search + "%",pageRequest);
+			fornecedores = fornecedorRepository.fullTextSearch("%" + search + "%",pageRequest);
 			log.info("pesquisa: " + search + " registros: " + fornecedores.getTotalElements() );
 		}
 		
