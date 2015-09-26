@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>{
 	Page<Fornecedor> findAll(Pageable pageRequest);
 	Page<Fornecedor> findByNomefornecedorLike(String name, Pageable pageRequest);
+	Page<Fornecedor> findByNomefantasiaLike(String name, Pageable pageRequest);
+	Page<Fornecedor> findByNomefornecedorOrNomefantasia(String name, Pageable pageRequest);
 
 
 }
