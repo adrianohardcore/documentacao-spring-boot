@@ -61,11 +61,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.apache.commons.lang3.StringUtils;
 
 
-
-
-
-
-
 @Controller
 @PreAuthorize("hasRole('ADMIN')")
 public class FornecedorController {
@@ -112,10 +107,12 @@ public class FornecedorController {
 			log.info("Pesquisando...");
 			//users = userRepository.findByNameLike("%" + search + "%",pageRequest);
 			fornecedores = fornecedorRepository.fullTextSearch("%" + search + "%",pageRequest);
+			//fornecedores = fornecedorRepository.findByNomefornecedorLikeIgnoreCaseOrNomefantasiaLikeIgnoreCase("%" + search + "%", "%" + search + "%",pageRequest);
+            //fornecedores = fornecedorRepository.fullTextSearch("%" + search + "%",pageRequest);
 			log.info("pesquisa: " + search + " registros: " + fornecedores.getTotalElements() );
 		}
 		
-		
+
 		
 	
 		Map<String,Object> modelMap = new HashMap<String,Object>();
