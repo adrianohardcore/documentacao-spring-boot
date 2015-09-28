@@ -2,28 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1049699-3b1a-4069-8f2f-f22e932f3c9b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_infradna_tool_bridge_method_annotation_1_13.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysema_codegen_codegen_0_6_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysema_commons_mysema_commons_lang_0_2_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysema_querydsl_querydsl_apt_3_6_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysema_querydsl_querydsl_codegen_3_6_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysema_querydsl_querydsl_core_3_6_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mysema_querydsl_querydsl_jpa_3_6_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jdt_core_compiler_ecj_4_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pom2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/adrianohardcore/controller/FornecedorController.class" afterPath="$PROJECT_DIR$/target/classes/br/com/adrianohardcore/controller/FornecedorController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/adrianohardcore/repository/FornecedorRepository.class" afterPath="$PROJECT_DIR$/target/classes/br/com/adrianohardcore/repository/FornecedorRepository.class" />
+      <change type="DELETED" beforePath="C:\java\projetos\documentacao-spring-boot\target\classes\br\com\adrianohardcore\controller\FornecedorController.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spring2.iml" afterPath="$PROJECT_DIR$/spring2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="spring2.iws" />
@@ -81,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FornecedorRepository.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FornecedorRepository.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.220297">
+              <caret line="29" column="83" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,15 +74,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FornecedorController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FornecedorController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.32673267">
-              <caret line="138" column="21" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8008#8023#0" expanded="true" />
-                <element signature="e#10024#10039#0" expanded="true" />
+                <element signature="e#4070#4086#0" expanded="true" />
+                <element signature="e#5025#5041#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -162,8 +143,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/static/app/cliente/app.js" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/UsuarioRepository.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java" />
       </list>
     </option>
   </component>
@@ -736,7 +717,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443353721713</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adicionando suporte ao QueryDsl para pesquisas avançadas.">
+      <created>1443411572599</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1443411572599</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -820,7 +807,8 @@
     <MESSAGE value="Editando usuário" />
     <MESSAGE value="Alteração referente aos usuários" />
     <MESSAGE value="Ajustando as pesquisas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustando as pesquisas" />
+    <MESSAGE value="Adicionando suporte ao QueryDsl para pesquisas avançadas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionando suporte ao QueryDsl para pesquisas avançadas." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1196,16 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/java/lang/String.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1216,12 +1194,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.32673267">
-          <caret line="138" column="21" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8008#8023#0" expanded="true" />
-            <element signature="e#10024#10039#0" expanded="true" />
+            <element signature="e#4070#4086#0" expanded="true" />
+            <element signature="e#5025#5041#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.220297">
+          <caret line="29" column="83" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
