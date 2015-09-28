@@ -7,6 +7,26 @@ import br.com.adrianohardcore.model.validator.UsuarioValidator;
 import br.com.adrianohardcore.repository.PermissaoRepository;
 import br.com.adrianohardcore.repository.UsuarioRepository;
 import br.com.adrianohardcore.service.UsuarioService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysema.query.BooleanBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +45,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.security.Principal;
 
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+	import org.springframework.web.bind.annotation.PathVariable;
+
+	import org.springframework.web.bind.annotation.RequestMapping;   
+
+	import org.springframework.stereotype.Controller;
+
+	import org.springframework.ui.Model;
+
+
 
 @Controller
 @PreAuthorize("hasRole('USER')")
@@ -40,11 +78,48 @@ public class UsuarioController {
 	@Autowired    
 	public PermissaoRepository permissaoRepository;
 	
- 	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)	
-	public String lista(Principal principal,Model model){
-		model.addAttribute("usuarios",usuarioService.getAllUsers() );
+ 	@RequestMapping(value = "/usuario", method = RequestMethod.GET)	
+	public String lista(){
 		return "/usuario/lista";
 	}
+	
+	@RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> findItems(
+            @RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "nome", required = false) String nome,
+			@RequestParam(value = "nomeusuario", required = false) String nomeusuario,
+			@RequestParam(value = "email", required = false) String email,			
+            @RequestParam(value = "sort", required = false) String psort,
+            @RequestParam(value = "order", required = false) String porder,
+            @RequestParam(value = "limit", required = false) Integer limit,
+            @RequestParam(value = "offset", required = false) Integer offset            
+    ) {
+        Integer page = (offset / limit);
+        Pageable pageRequest = new PageRequest(page, limit, Direction.fromString(porder), psort);        
+        QUsuario usuario = QUsuario.usuario;
+        BooleanBuilder where = new BooleanBuilder();
+		//if (StringUtils.isNumeric(id))
+		//	where.or(usuario.id.eq(Integer.parseInt(search)));
+		
+		
+		if (StringUtils.isNumeric(id))  where.or(usuario.id.eq(Integer.parseInt(id)));	
+		
+		
+/*         if (id != null || nome != null || nomeusuario != null || email  != null ||  ) {		
+			if (StringUtils.isNumeric(search))
+				where.or(usuario.id.eq(Integer.parseInt(search)));
+			where.or(usuario.nome.containsIgnoreCase(search));
+			where.or(usuario.nomeusuario.containsIgnoreCase(search));
+			where.or(usuario.email.containsIgnoreCase(search));    
+        } */
+		
+        Page<Usuario> usuarioes = usuarioRepository.findAll(where, pageRequest);
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("total", usuarioes.getTotalElements());
+        modelMap.put("rows", usuarioes.getContent());
+        return modelMap;
+    }
 
     @PreAuthorize("true")
     @RequestMapping(value = "/usuario/form", method = RequestMethod.GET)
@@ -64,7 +139,7 @@ public class UsuarioController {
 		model.addAttribute("usuario", usuario);
 		return "usuario/formUsuarioAtual";
 	}
-
+ 
 //    @RequestMapping(value = "/usuario/{id}/editar", method = RequestMethod.GET)
 //    public String formEdit(Usuario usuario,Model model) {
 //

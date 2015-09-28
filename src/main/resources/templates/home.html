@@ -7,12 +7,88 @@
 <body>
 <div th:replace="fragments/layout :: navbar">(navbar)</div>
 <!-- Begin page content -->
-<div class="container">
-    <div class="page-header">
-        <h1>Bem vindos</h1>
-    </div>
-</div>
-<div th:include="fragments/layout :: footer">
-</div>
+
+<div th:replace="fragments/layout :: navbar">(navbar)</div>	    
+    <div class="container">
+	
+		<div class="page-header">
+			<h1>Fornecedor <small> Listagem de fornecedor</small></h1>
+	    </div>	
+		
+		<div id="custom-toolbar">
+			<div class="form-inline" role="form">
+				
+				<div class="form-group">
+					<label class="sr-only" for="idfornecedor">Código Fornecedor</label>
+					<input class="form-control" id="idfornecedor" placeholder="Código Fornecedor" type="text">
+				</div>
+				
+				<div class="form-group">
+					<label class="sr-only" for="nomefornecedor">Razão Social</label>
+					<input class="form-control" id="nomefornecedor" placeholder="Razão Social" type="text">
+				</div>	
+				
+				<div class="form-group">
+					<label class="sr-only" for="nomefornecedor">Fantasia</label>
+					<input class="form-control" id="nomefantasia" placeholder="nomefantasia" type="text">
+				</div>					
+				
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="ativo"> Ativo
+					</label>
+				</div>
+				
+				<button type="submit" id="search" class="btn btn-default">Pesquisar</button>
+			</div>
+		</div>		
+		
+		<table id="table"
+               data-toggle="table"
+               data-url="/fornecedores"
+               data-height="450"
+               data-side-pagination="server"			   
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"               
+			   data-advanced-search="false"			   
+			   data-sort-name="nomefornecedor"
+			   data-query-params="queryParams"
+			   data-toolbar="#custom-toolbar"			   
+			   >
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+				<th data-field="idfornecedor" data-sortable="true">Código fornecedor</th>
+				<th data-field="nomefornecedor" data-sortable="true">Razão Social</th>
+				<th data-field="nomefantasia" data-sortable="true">Fantasia</th>
+            </tr>
+            </thead>
+        </table>	
+		
+		<script>
+			function queryParams(p) {
+				if (!p.search) {
+					//return false; // Return false to stop request.			
+				}		
+				return {
+							idfornecedor: $('#idfornecedor').val(),
+							nomefornecedor:$('#nomefornecedor').val(),
+							nomefantasia:$('#nomefantasia').val(),
+							ativo:$('#ativo').val(),					
+							sort: p.sort,
+							order: p.order,
+							limit: p.limit,
+							offset: p.offset
+				};
+			}
+				$('#search').click(function () {										
+					$("#table").bootstrapTable('refresh');
+			});		
+		</script>
+			</div>
+			
+			
+			
+
 </body>
 </html>
