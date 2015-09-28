@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1049699-3b1a-4069-8f2f-f22e932f3c9b" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\java\projetos\documentacao-spring-boot\target\classes\br\com\adrianohardcore\controller\FornecedorController.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/controller/FornecedorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/adrianohardcore/repository/FornecedorRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="spring2.iws" />
@@ -723,7 +720,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443411572599</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ajustando Querydsl">
+      <created>1443414195739</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1443414195739</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -808,7 +811,8 @@
     <MESSAGE value="Alteração referente aos usuários" />
     <MESSAGE value="Ajustando as pesquisas" />
     <MESSAGE value="Adicionando suporte ao QueryDsl para pesquisas avançadas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionando suporte ao QueryDsl para pesquisas avançadas." />
+    <MESSAGE value="Ajustando Querydsl" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustando Querydsl" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
