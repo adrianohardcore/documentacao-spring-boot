@@ -1,108 +1,69 @@
 ﻿<html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="fragments/layout :: htmlhead" th:with="title='Usuários'"></head>
-  <body>
-    <div th:replace="fragments/layout :: navbar">(navbar)</div>	    
-    <div class="container">
+<head th:include="fragments/layout :: htmlhead" th:with="title='Usuários'"></head>
+<body>
+<div th:replace="fragments/layout :: navbar">(navbar)</div>
+<div class="container">
 
-		<div class="page-header">
-			<h1>
-				Usuários <small> Lista de usuários cadastrados 999</small>
-			</h1>
-		</div>
+    <div class="page-header">
+        <h1>
+            Usuários
+            <small> Lista de usuários cadastrados 999</small>
+        </h1>
+    </div>
 
-	  
-<!-- 		<table class="table table-striped">
-			<tr>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>Usuário</th>
-				<th>Email</th>
-                <th>Editar</th>
-					
-			</tr>
-			<tr th:each="usuario : ${usuarios}">
-				<td th:text="${usuario.id}">ID</td>
-				<td th:text="${usuario.nome}">Documento</td>
-				<td th:text="${usuario.nomeusuario}">Usuário</td>
-				<td th:text="${usuario.email}">Email</td>
-                <td>
+    <div id="custom-toolbar">
+        <div class="form-inline" role="form">
 
+            <div class="form-group">
+                <label class="sr-only" for="id">Código Usuário</label>
+                <input class="form-control" id="id" placeholder="Código Usuário" type="text">
+            </div>
 
-                    <a th:href="@{|/usuario/${usuario.id}/form|}">Editar</a>
+            <div class="form-group">
+                <label class="sr-only" for="nome">Nome</label>
+                <input class="form-control" id="nome" placeholder="Nome" type="text">
+            </div>
 
-                </td>
-			</tr>
-		</table> -->
-		
-		
-				<div id="custom-toolbar">
-			<div class="form-inline" role="form">
-				
-				<div class="form-group">
-					<label class="sr-only" for="id">Código Usuário</label>
-					<input class="form-control" id="id" placeholder="Código Usuário" type="text">
-				</div>
-				
-				<div class="form-group">
-					<label class="sr-only" for="nome">Nome</label>
-					<input class="form-control" id="nome" placeholder="Nome" type="text">
-				</div>	
-				
-				<div class="form-group">
-					<label class="sr-only" for="nomeusuario">Usuário</label>
-					<input class="form-control" id="nomeusuario" placeholder="Usuário" type="text">
-				</div>	
-				
-				<div class="form-group">
-					<label class="sr-only" for="email">Email</label>
-					<input class="form-control" id="email" placeholder="Email" type="text">
-				</div>					
-				
-				<button type="submit" id="search" class="btn btn-default">Pesquisar</button>
-			</div>
-		</div>		
-		
-		<table id="table"
-               data-toggle="table"
-               data-url="/usuarios"
-               data-height="450"
-               data-side-pagination="server"			   
-               data-pagination="true"
-               data-page-list="[5, 10, 20, 50, 100, 200]"               
-			   data-advanced-search="false"			   
-			   data-sort-name="nome"
-			   data-query-params="queryParams"
-			   data-toolbar="#custom-toolbar"
-               data-show-header="false"
-               data-classes="table table-hover table-no-bordered">
+            <div class="form-group">
+                <label class="sr-only" for="nomeusuario">Usuário</label>
+                <input class="form-control" id="nomeusuario" placeholder="Usuário" type="text">
+            </div>
 
-            <thead>
-            <tr>
-                <th data-field="state" data-checkbox="true"></th>
-				<th data-field="id" data-sortable="true">Código usuário</th>
-				<th data-field="nome" data-sortable="true">Nome</th>
-				<th data-field="nomeusuario" data-sortable="true">Usuário</th>
-				<th data-field="email" data-sortable="true">Email</th>
-                <th data-field="action" data-formatter="actionFormatter">Action</th>
+            <div class="form-group">
+                <label class="sr-only" for="email">Email</label>
+                <input class="form-control" id="email" placeholder="Email" type="text">
+            </div>
 
+            <button type="submit" id="search" class="btn btn-default">Pesquisar</button>
+        </div>
+    </div>
 
-                <th><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></th>
-                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    <table id="table"
+           data-toggle="table"
+           data-url="/usuarios"
+           data-height="450"
+           data-side-pagination="server"
+           data-pagination="true"
+           data-page-list="[5, 10, 20, 50, 100, 200]"
+           data-advanced-search="false"
+           data-sort-name="nome"
+           data-query-params="queryParams"
+           data-toolbar="#custom-toolbar"
+           data-show-header="false"
+           data-classes="table table-hover table-no-bordered">
 
+        <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="id" data-sortable="true">Código usuário</th>
+            <th data-field="nome" data-sortable="true">Nome</th>
+            <th data-field="nomeusuario" data-sortable="true">Usuário</th>
+            <th data-field="email" data-sortable="true">Email</th>
+        </tr>
+        </thead>
+    </table>
 
-            </tr>
-            </thead>
-        </table>
-		
-		<script>
-		    function imageFormatter() {
-        return '<img src="holder.js/100x150">';
-    }
-    function actionFormatter() {
-        return '<i class="glyphicon glyphicon-heart"></i> <i class="glyphicon glyphicon-remove"></i>';
-    }
-
-
+    <script>
 			function queryParams(p) {
 				if (!p.search) {
 					//return false; // Return false to stop request.			
@@ -121,11 +82,9 @@
 				$('#search').click(function () {										
 					$("#table").bootstrapTable('refresh');
 			});
-		</script>
-		
-		
-    </div>    
-	<div th:include="fragments/layout :: footer">
-	</div>
-  </body>
+    </script>
+</div>
+<div th:include="fragments/layout :: footer">
+</div>
+</body>
 </html>

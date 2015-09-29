@@ -28,4 +28,5 @@ public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>
     @Query(value = "SELECT f FROM Fornecedor f WHERE " +
             "(?1 IS NULL  OR UPPER(f.nomefornecedor) LIKE UPPER(CONCAT('%',:text, '%'))  )")
     Page<Fornecedor> fullTextSearch(@Param("text") String text, Pageable pageable);
+    //teste
 }

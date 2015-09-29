@@ -107,7 +107,7 @@ public class FornecedorController {
         Map<String, String> map = new HashMap<String, String>();
         ObjectMapper mapper = new ObjectMapper();
         try {
-            //convert JSON string to Map
+            //convert JSON string to Map//---
             map = mapper.readValue(json,
                     new TypeReference<HashMap<String, String>>() {
                     });

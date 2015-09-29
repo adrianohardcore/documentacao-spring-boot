@@ -100,18 +100,6 @@ public class UsuarioController {
         return "usuario/formUsuarioAtual";
     }
 
-//    @RequestMapping(value = "/usuario/{id}/editar", method = RequestMethod.GET)
-//    public String formEdit(Usuario usuario,Model model) {
-//
-//        log.info("Formulario de edicao de usuario");
-//
-//
-//        usuarioService.getUserById(id);
-//        model.addAttribute("usuario", usuario);
-//        return "usuario/formUsuarioAtual";
-//    }
-
-
     @Transactional
     @PreAuthorize("true")
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
@@ -126,7 +114,6 @@ public class UsuarioController {
         usuarioService.create(usuario);
         return "redirect:/usuario";
     }
-
 
     @RequestMapping(value = "/usuario/{id}/form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
