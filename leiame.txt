@@ -1,7 +1,0 @@
-mvn spring-boot:run
-mvn clean install
-
-npm install -g bower
-bower install
-
-pause
