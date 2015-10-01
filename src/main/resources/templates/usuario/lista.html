@@ -59,9 +59,11 @@
             <th data-field="nome" data-sortable="true">Nome</th>
             <th data-field="nomeusuario" data-sortable="true">Usuário</th>
             <th data-field="email" data-sortable="true">Email</th>
+            <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Item Operate</th>
         </tr>
         </thead>
     </table>
+    <button type="button" ng-click="delete()" confirm-if="checked" confirm="Are you sure, {{name}}?">Delete</button>
 
     <script>
 			function queryParams(p) {
@@ -83,6 +85,60 @@
 					$("#table").bootstrapTable('refresh');
 			});
     </script>
+
+    <script>
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="edit ml10" href="javascript:void(0)" title="Editar">',
+                '<i class="glyphicon glyphicon-edit"></i>',
+            '</a>',
+            '<a class="remove ml10" href="javascript:void(0)" title="Excluir">',
+                '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>',
+            '<button confirmed-click="removeRowIndex(col, row)" ng-confirm-box-click="Are you sure want to delete?" class="btn btn-xs btn-default"></button>'
+
+        ].join('');
+    }
+
+    window.operateEvents = {
+
+        'click .edit': function (e, value, row, index) {
+            document.location.href='/usuario/'+ JSON.stringify(row.id) + '/form';
+            console.log(value, row, index);
+        },
+        'click .remove': function (e, value, row, index) {
+            alert('You click remove icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        }
+    };
+
+    app.directive('ngConfirmBoxClick', [
+
+      function () {
+          return {
+              link: function (scope, element, attr) {
+                  var msg = attr.ngConfirmBoxClick;
+                  var clickAction = attr.confirmedClick;
+                  element.bind('click', function (event) {
+                      if (window.confirm(msg)) {
+                          scope.$eval(clickAction)
+                      }
+                  });
+              }
+          };
+      }
+]);
+
+
+
+
+</script>
+
+
+
+
+
+
 </div>
 <div th:include="fragments/layout :: footer">
 </div>
