@@ -1,13 +1,14 @@
 ﻿<html xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/layout :: htmlhead" th:with="title='Usuários'"></head>
 <body>
+
 <div th:replace="fragments/layout :: navbar">(navbar)</div>
 <div class="container">
 
     <div class="page-header">
         <h1>
             Usuários
-            <small> Lista de usuários cadastrados 999</small>
+            <small> Lista de usuários cadastrados</small>
         </h1>
     </div>
 
@@ -37,6 +38,9 @@
             <button type="submit" id="search" class="btn btn-default">Pesquisar</button>
         </div>
     </div>
+    <h2>Teste</h2>
+
+    <p></p>
 
     <table id="table"
            data-toggle="table"
@@ -49,21 +53,19 @@
            data-sort-name="nome"
            data-query-params="queryParams"
            data-toolbar="#custom-toolbar"
-           data-show-header="false"
+           data-show-header="true"
            data-classes="table table-hover table-no-bordered">
 
         <thead>
         <tr>
-            <th data-field="state" data-checkbox="true"></th>
             <th data-field="id" data-sortable="true">Código usuário</th>
             <th data-field="nome" data-sortable="true">Nome</th>
             <th data-field="nomeusuario" data-sortable="true">Usuário</th>
             <th data-field="email" data-sortable="true">Email</th>
-            <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Item Operate</th>
+            <th data-field="acoes" data-formatter="operateFormatter" data-events="operateEvents">Ações</th>
         </tr>
         </thead>
     </table>
-    <button type="button" ng-click="delete()" confirm-if="checked" confirm="Are you sure, {{name}}?">Delete</button>
 
     <script>
 			function queryParams(p) {
@@ -94,9 +96,7 @@
             '</a>',
             '<a class="remove ml10" href="javascript:void(0)" title="Excluir">',
                 '<i class="glyphicon glyphicon-remove"></i>',
-            '</a>',
-            '<button confirmed-click="removeRowIndex(col, row)" ng-confirm-box-click="Are you sure want to delete?" class="btn btn-xs btn-default"></button>'
-
+            '</a>'
         ].join('');
     }
 
@@ -107,40 +107,57 @@
             console.log(value, row, index);
         },
         'click .remove': function (e, value, row, index) {
-            alert('You click remove icon, row: ' + JSON.stringify(row));
-            console.log(value, row, index);
+            var url = "/usuario/" + row.id;
+             console.log(value, row, index ,url);
+            $('#myModal').data('id', id).modal('show');
+            $('#btnDelteYes').click(function () {
+
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                success: function(result) {
+                    $('#table').bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                },
+                    error:function(result) {
+                    console.log(result);
+                }
+            });
+                $('#myModal').modal('hide');
+
+            });
         }
     };
-
-    app.directive('ngConfirmBoxClick', [
-
-      function () {
-          return {
-              link: function (scope, element, attr) {
-                  var msg = attr.ngConfirmBoxClick;
-                  var clickAction = attr.confirmedClick;
-                  element.bind('click', function (event) {
-                      if (window.confirm(msg)) {
-                          scope.$eval(clickAction)
-                      }
-                  });
-              }
-          };
-      }
-]);
-
-
-
-
 </script>
 
-
-
-
-
-
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Atenção!</h3>
+                </div>
+                <div class="modal-body">
+                    <h4> Tem certeza que deseja excluir?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnDelteYes" href="#">Sim</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div th:include="fragments/layout :: footer">
 </div>
 </body>
+<csrf/>
 </html>

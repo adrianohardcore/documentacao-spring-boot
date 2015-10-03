@@ -122,6 +122,13 @@ public class UsuarioController {
         return "usuario/formEditar";
     }
 
+
+    @RequestMapping(value = "/usuario/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void delete(@PathVariable Long id) {
+        log.info("Apagando o usuário " + id + " ...");
+    }
+
     @RequestMapping(value = "/usuarioEditar", method = RequestMethod.POST)
     public String update(@ModelAttribute @Valid Usuario usuario, BindingResult result, Model model) {
         log.info("Atualizar usuarios do formulario update");
