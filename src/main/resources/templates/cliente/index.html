@@ -1,61 +1,109 @@
-<!doctype html>
-<html ng-app="app">
-<head>
-    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-touch/angular-touch.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css">
-    <!--<script src="bower_components/angular-ui-grid/ui-grid.js"></script>-->
-    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+        >
+
+<head th:include="fragments/layout :: htmlhead" th:with="title='Início'">
 </head>
 <body>
+<div th:replace="fragments/layout :: navbar">(navbar)</div>
+<!-- Begin page content -->
 
-<!--<div ng-controller="MainCtrl">-->
-    <!--<button id="reset" class="button" ng-click="reset()">Reset</button>-->
-    <!--<span> &nbsp; &nbsp; First page: {{ firstPage }} &nbsp; &nbsp; Last page: {{ lastPage }}  &nbsp; &nbsp; data.length: {{ data.length }} </span>-->
-    <!--<div ui-grid="gridOptions" class="grid" ui-grid-infinite-scroll></div>-->
-<!--</div>-->
+<div th:replace="fragments/layout :: navbar">(navbar)</div>
+<div class="container">
 
-<!--<div ng-controller="MainCtrl">-->
-    <!--<div ui-grid="gridOptions" class="grid" ui-grid-infinite-scroll></div>-->
-<!--</div>-->
+    <div class="page-header">
+        <h1>Cliente
+            <small> Listagem de clientes</small>
+        </h1>
+    </div>
 
-<div ng-controller="MainCtrl">
-    <div ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Documento</th>
+            <th>Nome</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            <th></th>
+            <th>Documento</th>
+            <th>Nome</th>
+        </tr>
+        </tfoot>
+    </table>
 </div>
+<script>
+    function format ( d ) {
+    return 'Full name: '+d.doctocliente+' '+d.nomecliente+'<br>'+
+        'Salary: '+d.nomecliente+'<br>'+
+        'The child row can contain any data you wish, including links, images, inner tables etc.';
+}
 
-<script src="/app/cliente/app.js"></script>
+$(document).ready(function() {
+    var dt = $('#example').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/clientes",
+        "columns": [
+            {
+                "class":          "details-control",
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ""
+            },
+            { "data": "doctocliente" },
+            { "data": "nomecliente" }
+        ],
+        "order": [[1, 'asc']]
+    } );
+
+    // Array to track the ids of the details displayed rows
+    var detailRows = [];
+
+    $('#example tbody').on( 'click', 'tr td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = dt.row( tr );
+        var idx = $.inArray( tr.attr('id'), detailRows );
+
+        if ( row.child.isShown() ) {
+            tr.removeClass( 'details' );
+            row.child.hide();
+
+            // Remove from the 'open' array
+            detailRows.splice( idx, 1 );
+        }
+        else {
+            tr.addClass( 'details' );
+            row.child( format( row.data() ) ).show();
+
+            // Add to the 'open' array
+            if ( idx === -1 ) {
+                detailRows.push( tr.attr('id') );
+            }
+        }
+    } );
+
+    // On each draw, loop over the `detailRows` array and show any child rows
+    dt.on( 'draw', function () {
+        $.each( detailRows, function ( i, id ) {
+            $('#'+id+' td.details-control').trigger( 'click' );
+        } );
+    } );
+} );
+
+
+
+
+
+
+
+
+
+</script>
+
+
 </body>
 </html>
-
-
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head th:include="fragments/layout :: htmlhead" th:with="title='Usuários'">-->
-<!--</head>-->
-<!--<body ng-app="app">-->
-<!--<div th:replace="fragments/layout :: navbar">(navbar)</div>-->
-<!--<div class="container">-->
-
-    <!--<div class="page-header">-->
-        <!--<h1>-->
-            <!--Clientes <small> Lista de clientes cadastrados</small>-->
-        <!--</h1>-->
-    <!--</div>-->
-
-    <!--<div ng-controller="MainCtrl">-->
-        <!--<button id="reset" class="button" ng-click="reset()">Reset</button>-->
-        <!--<span> &nbsp; &nbsp; First page: {{ firstPage }} &nbsp; &nbsp; Last page: {{ lastPage }}  &nbsp; &nbsp; data.length: {{ data.length }} </span>-->
-        <!--<div ui-grid="gridOptions" class="grid" ui-grid-infinite-scroll></div>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<div th:include="fragments/layout :: footer">-->
-<!--</div>-->
-<!--<script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>-->
-<!--<script src="/bower_components/angular-touch/angular-touch.js"></script>-->
-<!--<script src="/bower_components/angular-animate/angular-animate.js"></script>-->
-<!--<script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>-->
-<!--<script type="text/javascript" src="/bower_components/lodash/dist/lodash.min.js"></script>-->
-<!--<script type="text/javascript" src="/app/cliente/app.js"></script>-->
-<!--</body>-->
-<!--</html>-->

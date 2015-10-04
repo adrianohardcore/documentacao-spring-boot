@@ -2,6 +2,7 @@ package br.com.adrianohardcore.controller;
 
 
 import br.com.adrianohardcore.model.CustomUserDetails;
+import br.com.adrianohardcore.model.QPermissao;
 import br.com.adrianohardcore.model.QUsuario;
 import br.com.adrianohardcore.model.Usuario;
 import br.com.adrianohardcore.model.validator.UsuarioValidator;
@@ -57,15 +58,22 @@ public class UsuarioController {
             @RequestParam(value = "nome", required = false) String nome,
             @RequestParam(value = "nomeusuario", required = false) String nomeusuario,
             @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "permissao", required = false, defaultValue = "") String permissoes,
 
             @RequestParam(value = "sort", required = false) String psort,
             @RequestParam(value = "order", required = false) String porder,
             @RequestParam(value = "limit", required = false) Integer limit,
             @RequestParam(value = "offset", required = false) Integer offset
     ) {
+        //Int permissao = new long["0"];
         Integer page = (offset / limit);
         Pageable pageRequest = new PageRequest(page, limit, Direction.fromString(porder), psort);
         QUsuario usuario = QUsuario.usuario;
+        QPermissao qPermissao = QPermissao.permissao;
+
+
+        log.info("Permissões: " + permissoes);
+
         BooleanBuilder where = new BooleanBuilder();
         //Long id = StringUtils.isNumeric(txtId);
 
@@ -74,7 +82,18 @@ public class UsuarioController {
         if (!nomeusuario.isEmpty()) where.or(usuario.nomeusuario.containsIgnoreCase(nomeusuario));
         if (!email.isEmpty()) where.or(usuario.email.containsIgnoreCase(email));
 
+//        if (permissao > 0) {
+//            //JPASubQuery  query = new JPASubQuery();
+//            //query.from(usuario,qPermissao).join(usuario.permissoes, qPermissao).where(qPermissao.id.in(permissao));
+//
+//            where.or(usuario.permissoes.any().id.eq(permissao));
+//
+//
+//            //Page<Usuario> usuarios = usuarioRepository.findAll(query, pageRequest);
+//        }
         Page<Usuario> usuarios = usuarioRepository.findAll(where, pageRequest);
+
+
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("total", usuarios.getTotalElements());
         modelMap.put("rows", usuarios.getContent());

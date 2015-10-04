@@ -35,16 +35,30 @@
                 <input class="form-control" id="email" placeholder="Email" type="text">
             </div>
 
+            <!--<div class="form-group">-->
+            <!--<label class="sr-only" for="email">Permissão</label>-->
+            <!--<select name="permissoes" id="permissoes" class="form-control"></select>-->
+            <!--</select>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <!--<label class="sr-only" for="email">Permissão</label>-->
+                <!--<select name="permissoes" id="permissoes" multiple="multiple" class="testselect3" style="display: none;"></select>-->
+                <!--</select>-->
+
+
+            </div>
+
             <button type="submit" id="search" class="btn btn-default">Pesquisar</button>
         </div>
+        <select id="permissoes" class="js-example-responsive" multiple="multiple" style="width: 95%">
+        </select>
     </div>
-    <h2>Teste</h2>
-
-    <p></p>
-
     <table id="table"
            data-toggle="table"
            data-url="/usuarios"
+           data-detail-view="true"
+           data-detail-formatter="detailFormatter"
            data-height="450"
            data-side-pagination="server"
            data-pagination="true"
@@ -76,7 +90,8 @@
 							id: $('#id').val(),
 							nome:$('#nome').val(),
 							nomeusuario:$('#nomeusuario').val(),
-							email:$('#email').val(),							
+							email:$('#email').val(),
+						    permissao:$('#permissoes').val(),
 							sort: p.sort,
 							order: p.order,
 							limit: p.limit,
@@ -136,6 +151,56 @@
             });
         }
     };
+
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            //html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+            switch(key) {
+                 case "nome":
+                  html.push('<p><b>Nome:</b> ' + value + '</p>');
+                  break;
+                 case "nomeusuario":
+                  html.push('<p><b>Usuário:</b> ' + value + '</p>');
+                  break;
+                 case "permissoes":
+
+                  html.push('<table class="table table-striped table-bordered">');
+                     html.push('<tr>');
+                        html.push('<th>ID</th>');
+                        html.push('<th>Permissão</th>');
+                     html.push('</tr>');
+                  $.each(value, function (key2, value2) {
+                    html.push('<tr><td>' + value2.id + '</td><td>' + value2.nomePermissao + '</td></tr>');
+                  });
+                   html.push('</table>');
+                  break;
+            }
+        });
+
+        return html.join('');
+    }
+
+
+
+
+
+      $.ajax({
+         type: "GET",
+         url: "/permissoes",
+         success: function(json){
+            var options = '<option value="">Permissões</option>';
+            $.each(json, function(key, value){
+               options += '<option value="' + value.id + '">' + value.nomePermissao + '</option>';
+            });
+            $("#permissoes").html(options);
+         }
+      });
+
+    $("#permissoes").select2({
+        placeholder: "Permissão",
+        tags: true
+    });
 </script>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

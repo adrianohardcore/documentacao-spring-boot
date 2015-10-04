@@ -37,3 +37,13 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+/* Datatables*/
+
+td.details-control {
+    background: url('../imagens/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.details td.details-control {
+    background: url('../../imagens/details_close.png') no-repeat center center;
+}
