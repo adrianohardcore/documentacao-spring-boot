@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -58,42 +59,28 @@ public class UsuarioController {
             @RequestParam(value = "nome", required = false) String nome,
             @RequestParam(value = "nomeusuario", required = false) String nomeusuario,
             @RequestParam(value = "email", required = false) String email,
-            @RequestParam(value = "permissao", required = false, defaultValue = "") String permissoes,
-
+            @RequestParam(value = "permissao[]", required = false, defaultValue = "") List<Long> permissoes,
             @RequestParam(value = "sort", required = false) String psort,
             @RequestParam(value = "order", required = false) String porder,
             @RequestParam(value = "limit", required = false) Integer limit,
             @RequestParam(value = "offset", required = false) Integer offset
     ) {
-        //Int permissao = new long["0"];
         Integer page = (offset / limit);
         Pageable pageRequest = new PageRequest(page, limit, Direction.fromString(porder), psort);
         QUsuario usuario = QUsuario.usuario;
         QPermissao qPermissao = QPermissao.permissao;
-
-
-        log.info("Permissões: " + permissoes);
-
         BooleanBuilder where = new BooleanBuilder();
-        //Long id = StringUtils.isNumeric(txtId);
-
         if (StringUtils.isNumeric(txtId)) where.or(usuario.id.eq(  Long.parseLong(txtId)   ));
         if (!nome.isEmpty()) where.or(usuario.nome.containsIgnoreCase(nome));
         if (!nomeusuario.isEmpty()) where.or(usuario.nomeusuario.containsIgnoreCase(nomeusuario));
         if (!email.isEmpty()) where.or(usuario.email.containsIgnoreCase(email));
 
-//        if (permissao > 0) {
-//            //JPASubQuery  query = new JPASubQuery();
-//            //query.from(usuario,qPermissao).join(usuario.permissoes, qPermissao).where(qPermissao.id.in(permissao));
-//
-//            where.or(usuario.permissoes.any().id.eq(permissao));
-//
-//
-//            //Page<Usuario> usuarios = usuarioRepository.findAll(query, pageRequest);
-//        }
+        if (permissoes.size() > 0) {
+            where.and(usuario.permissoes.any().id.in(permissoes));
+            log.info("Permissoes filtradas: " + permissoes.get(0));
+        }
+
         Page<Usuario> usuarios = usuarioRepository.findAll(where, pageRequest);
-
-
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("total", usuarios.getTotalElements());
         modelMap.put("rows", usuarios.getContent());

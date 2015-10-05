@@ -46,13 +46,12 @@
                 <!--<select name="permissoes" id="permissoes" multiple="multiple" class="testselect3" style="display: none;"></select>-->
                 <!--</select>-->
 
+                <select id="permissoes" multiple="multiple">
 
+                </select>
             </div>
-
             <button type="submit" id="search" class="btn btn-default">Pesquisar</button>
         </div>
-        <select id="permissoes" class="js-example-responsive" multiple="multiple" style="width: 95%">
-        </select>
     </div>
     <table id="table"
            data-toggle="table"
@@ -182,25 +181,51 @@
     }
 
 
-
-
-
       $.ajax({
          type: "GET",
          url: "/permissoes",
          success: function(json){
-            var options = '<option value="">Permissões</option>';
+            var options = '';
             $.each(json, function(key, value){
                options += '<option value="' + value.id + '">' + value.nomePermissao + '</option>';
             });
             $("#permissoes").html(options);
+
+
+            $('#permissoes').multiselect({
+                nonSelectedText: 'Permissões'
+            });
+
+
+
+
          }
       });
 
-    $("#permissoes").select2({
-        placeholder: "Permissão",
-        tags: true
-    });
+
+
+
+
+    //$(document).ready(function() {
+        //$('#permissoes').multiselect();
+
+
+
+
+
+
+    <!--$(document).ready(function() {-->
+        <!--$('#permissoes').multiselect({-->
+            <!--onDropdownShow: function(event) {-->
+                <!--//alert('Dropdown shown.');-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+
+
+
+    //});
+
 </script>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
