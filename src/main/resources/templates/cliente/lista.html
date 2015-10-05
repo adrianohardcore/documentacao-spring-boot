@@ -1,14 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="fragments/layout :: htmlhead" th:with="title='Clientes'"></head>
-  <body>
-    <div th:replace="fragments/layout :: navbar">(navbar)</div>	    
-    <div class="container">
-	
-		<div class="page-header">
-			<h1>Cliente <small> Listagem de cliente</small></h1>
-		</div>	
+<head th:include="fragments/layout :: htmlhead"
+	th:with="title='Clientes'"></head>
+<body>
+	<div th:replace="fragments/layout :: navbar">(navbar)</div>
+	<div class="container">
 
-	  
+		<div class="page-header">
+			<h1>
+				Cliente <small> Listagem de cliente</small>
+			</h1>
+		</div>
+
+
 		<table class="table table-striped">
 			<tr>
 				<th>Documento</th>
@@ -18,10 +21,9 @@
 				<td th:text="${cliente.doctocliente}">Documento</td>
 				<td th:text="${cliente.nomecliente}">Nome</td>
 			</tr>
-		</table>        
+		</table>
 
-    </div>    
-	<div th:include="fragments/layout :: footer">
 	</div>
-  </body>
+	<div th:include="fragments/layout :: footer"></div>
+</body>
 </html>

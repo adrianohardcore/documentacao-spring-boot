@@ -1,119 +1,126 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/layout :: htmlhead"
-      th:with="title='Editar - Usu√°rio'"></head>
+	th:with="title='Editar - Usu·rio'"></head>
 <body>
-<div th:replace="fragments/layout :: navbar">(navbar)</div>
-<div class="container">
+	<div th:replace="fragments/layout :: navbar">(navbar)</div>
+	<div class="container">
 
-    <form action="#" th:action="@{/usuarioEditar}"
-          th:object="${usuario}" method="post" class="form-horizontal">
-        <div class="page-header">
-            <h1>
-                Usu√°rio
-                <small> Editar usu√°rio</small>
-            </h1>
-        </div>
-        <div th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
-            <div class="alert alert-danger" role="alert">
-                            <span th:text="${e.global}? '*' : ${e.fieldName}">The field
-                                name</span> | <span th:text="${e.message}">The error message</span>
-            </div>
-        </div>
+		<form action="#" th:action="@{/usuarioEditar}" th:object="${usuario}"
+			method="post" class="form-horizontal">
+			<div class="page-header">
+				<h1>
+					Usu·rio <small> Editar usu·rio</small>
+				</h1>
+			</div>
+			<div th:each="e : ${#fields.detailedErrors()}"
+				th:class="${e.global}? globalerr : fielderr">
+				<div class="alert alert-danger" role="alert">
+					<span th:text="${e.global}? '*' : ${e.fieldName}">The field
+						name</span> | <span th:text="${e.message}">The error message</span>
+				</div>
+			</div>
 
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <div class="alert alert-danger" role="alert">
-                <div th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
-            </div>
-        </div>
-        <input type="hidden" th:field="*{id}"/>
-        <input type="hidden" th:field="*{senha}"/>
-        <!--<input type="hidden" th:field="*{delete}">-->
-
-
-        <div class="form-group">
-            <label for="nome" class="col-sm-2 control-label">Nome</label>
-
-            <div class="col-sm-5">
-                <input type="text" th:field="*{nome}" class="form-control maiusculo"/>
-
-                <!-- 					<spam th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</spam> -->
-                <spam th:if="${#fields.hasErrors('nome')}" class="label label-danger" th:errors="*{nome}">Incorrect LP
-                </spam>
-            </div>
-        </div>
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<div class="alert alert-danger" role="alert">
+					<div th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" /> <input type="hidden"
+				th:field="*{senha}" />
+			<!--<input type="hidden" th:field="*{delete}">-->
 
 
-        <div class="form-group">
-            <label for="nomeusuario" class="col-sm-2 control-label">Usu√°rio</label>
+			<div class="form-group">
+				<label for="nome" class="col-sm-2 control-label">Nome</label>
 
-            <div class="col-sm-5">
-                <input type="text" th:field="*{nomeusuario}" class="form-control maiusculo"/>
-                <spam th:if="${#fields.hasErrors('nomeusuario')}" class="label label-danger" th:errors="*{nomeusuario}">
-                    Incorrect LP
-                </spam>
-            </div>
-        </div>
+				<div class="col-sm-5">
+					<input type="text" th:field="*{nome}"
+						class="form-control maiusculo" />
 
-        <div class="form-group">
-            <label for="email" class="col-sm-2 control-label">Email</label>
-
-            <div class="col-sm-5">
-                <input type="email" th:field="*{email}" class="form-control maiusculo"/>
-                <spam th:if="${#fields.hasErrors('email')}" class="label label-danger" th:errors="*{email}">Incorrect
-                    LP
-                </spam>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="senhaForm" class="col-sm-2 control-label">Senha</label>
-
-            <div class="col-sm-5">
-                <input type="password" th:field="*{senhaForm}" class="form-control maiusculo"/>
-                <spam th:if="${#fields.hasErrors('senhaForm')}" class="label label-danger" th:errors="*{senhaForm}">
-                    Incorrect LP
-                </spam>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="confirmSenhaForm" class="col-sm-2 control-label">Comfirmar senha</label>
-
-            <div class="col-sm-5">
-                <input type="password" th:field="*{confirmSenhaForm}" class="form-control maiusculo"/>
-                <spam th:if="${#fields.hasErrors('confirmSenhaForm')}" class="label label-danger"
-                      th:errors="*{confirmSenhaForm}">Incorrect LP
-                </spam>
-            </div>
-        </div>
-
-        <div class="form-group ">
-            <label class="col-sm-2 control-label">Permiss√µes</label>
-
-            <div class="col-sm-5">
-                <table class="table table-striped ">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                    </tr>
-                    <tr th:each="permissao : ${usuario.permissoes}">
-                        <td th:text="${permissao.id}">Documento</td>
-                        <td th:text="${permissao.nomePermissao}">Usu√°rio</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+					<!-- 					<spam th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</spam> -->
+					<spam th:if="${#fields.hasErrors('nome')}"
+						class="label label-danger" th:errors="*{nome}">Incorrect LP
+					</spam>
+				</div>
+			</div>
 
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Comfirmar</button>
-                <button type="reset" class="btn btn-default">Limpar</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div th:include="fragments/layout :: footer"></div>
+			<div class="form-group">
+				<label for="nomeusuario" class="col-sm-2 control-label">Usu·rio</label>
+
+				<div class="col-sm-5">
+					<input type="text" th:field="*{nomeusuario}"
+						class="form-control maiusculo" />
+					<spam th:if="${#fields.hasErrors('nomeusuario')}"
+						class="label label-danger" th:errors="*{nomeusuario}">
+					Incorrect LP </spam>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="email" class="col-sm-2 control-label">Email</label>
+
+				<div class="col-sm-5">
+					<input type="email" th:field="*{email}"
+						class="form-control maiusculo" />
+					<spam th:if="${#fields.hasErrors('email')}"
+						class="label label-danger" th:errors="*{email}">Incorrect
+					LP </spam>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="senhaForm" class="col-sm-2 control-label">Senha</label>
+
+				<div class="col-sm-5">
+					<input type="password" th:field="*{senhaForm}"
+						class="form-control maiusculo" />
+					<spam th:if="${#fields.hasErrors('senhaForm')}"
+						class="label label-danger" th:errors="*{senhaForm}">
+					Incorrect LP </spam>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="confirmSenhaForm" class="col-sm-2 control-label">Comfirmar
+					senha</label>
+
+				<div class="col-sm-5">
+					<input type="password" th:field="*{confirmSenhaForm}"
+						class="form-control maiusculo" />
+					<spam th:if="${#fields.hasErrors('confirmSenhaForm')}"
+						class="label label-danger" th:errors="*{confirmSenhaForm}">Incorrect
+					LP </spam>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<label class="col-sm-2 control-label">Permissıes</label>
+
+				<div class="col-sm-5">
+					<table class="table table-striped ">
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+						</tr>
+						<tr th:each="permissao : ${usuario.permissoes}">
+							<td th:text="${permissao.id}">Documento</td>
+							<td th:text="${permissao.nomePermissao}">Usu·rio</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Comfirmar</button>
+					<button type="reset" class="btn btn-default">Limpar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="fragments/layout :: footer"></div>
 </body>
 </html>

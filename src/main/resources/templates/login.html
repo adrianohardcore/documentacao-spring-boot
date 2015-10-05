@@ -1,71 +1,45 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-		>
-  <head th:include="fragments/layout :: htmlhead" th:with="title='Início'"></head>
-  <body>
-    <div th:replace="fragments/layout :: navbar">(navbar)</div>	    
-    <div class="container">
-
-		
-
-        
-
- 
- 
-		<form th:action="@{/login}" method="post" class="form-horizontal">	
-
-
- 		<div th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
-			<div class="alert alert-danger" role="alert">
-				<span th:text="${e.global}? '*' : ${e.fieldName}" >The field name</span> |
-				<span th:text="${e.message}">The error message</span>						
-			</div>					
-		</div>
-		
-
-
-
-		
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: htmlhead" th:with="title='Início'"></head>
+<body>
+	<div th:replace="fragments/layout :: navbar">(navbar)</div>
+	<div class="container">
+		<form th:action="@{/login}" method="post" class="form-horizontal">
+			<div th:each="e : ${#fields.detailedErrors()}"
+				th:class="${e.global}? globalerr : fielderr">
+				<div class="alert alert-danger" role="alert">
+					<span th:text="${e.global}? '*' : ${e.fieldName}">The field
+						name</span> | <span th:text="${e.message}">The error message</span>
+				</div>
+			</div>
 			<div class="page-header">
 				<h1>Login</h1>
 			</div>
-			
-			<div th:if="${param.error} "  class="alert alert-danger">
-				Nome de usuário e senha inválida!
-			</div>
-			<div th:if="${param.logout}" class="alert alert-danger">
-				Você está desconectado!
-			</div>
- 
+			<div th:if="${param.error} " class="alert alert-danger">Nome de
+				usuário e senha inválida!</div>
+			<div th:if="${param.logout}" class="alert alert-danger">Você
+				está desconectado!</div>
 			<div class="form-group">
-			<label for="username" class="col-sm-2 control-label">Usuário</label>
-			<div class="col-sm-5">      	  			  
-			  <input type="text" name="username" class="form-control"/>
+				<label for="username" class="col-sm-2 control-label">Usuário</label>
+				<div class="col-sm-5">
+					<input type="text" name="username" class="form-control" />
+				</div>
 			</div>
-			</div>	
-
 			<div class="form-group">
-			<label for="password" class="col-sm-2 control-label">Senha</label>
-			<div class="col-sm-5">      	  
-			  <input type="password" name="password" class="form-control"/>
+				<label for="password" class="col-sm-2 control-label">Senha</label>
+				<div class="col-sm-5">
+					<input type="password" name="password" class="form-control" />
+				</div>
 			</div>
-			</div>	
-
 			<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-			  <button type="submit" class="btn btn-default">Comfirmar</button>	  
-			  <button type="reset" class="btn btn-default">Limpar</button>
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Comfirmar</button>
+					<button type="reset" class="btn btn-default">Limpar</button>
+				</div>
 			</div>
-			</div>		
 		</form>
-	  
-	  
-	  
-	  
-  
-      
-    </div>	    
-	<div th:include="fragments/layout :: footer">
 	</div>
-  </body>
+	<div th:include="fragments/layout :: footer"></div>
+</body>
 </html>
