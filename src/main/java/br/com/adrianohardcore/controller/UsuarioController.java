@@ -52,6 +52,13 @@ public class UsuarioController {
         return "/usuario/lista";
     }
 
+    @RequestMapping(value = "/usuariosList", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.findAll();
+    }
+
+
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Map<String, Object> findItems(

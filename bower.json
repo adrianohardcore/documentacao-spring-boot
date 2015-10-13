@@ -10,7 +10,9 @@
         "angular-animate": "~1.4.6",
         "angular-ui-grid": "~3.0.6",
         "bootstrap-table": "~1.8.1",
-        "jquery-ui" : ""
+      "jquery-ui": "",
+      "datatables": "",
+      "bootstrap-multiselect": ""
 
 	}
 }

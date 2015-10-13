@@ -1,83 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/layout :: htmlhead"
-	th:with="title='Novo - Usu�rio'"></head>
-<body>
-	<div th:replace="fragments/layout :: navbar">(navbar)</div>
-	<div class="container">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 
-		<form action="#" th:action="@{/usuario}" th:object="${usuario}"
-			method="post" class="form-horizontal">
-			<div class="page-header">
-				<h1>
-					Usu�rio <small> Adicionar novo usu�rio</small>
-				</h1>
-			</div>
-			<div th:if="${#fields.hasGlobalErrors()}">
-				<div class="alert alert-danger" role="alert">
-					<div th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
-				</div>
-			</div>
-			<input type="hidden" th:field="*{id}" />
-			<div class="form-group">
-				<label for="nome" class="col-sm-2 control-label">Nome</label>
-				<div class="col-sm-5">
-					<input type="text" th:field="*{nome}"
-						class="form-control maiusculo" />
-					<spam th:if="${#fields.hasErrors('nome')}"
-						class="label label-danger" th:errors="*{nome}">Incorrect LP</spam>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="nomeusuario" class="col-sm-2 control-label">Usu�rio</label>
-				<div class="col-sm-5">
-					<input type="text" th:field="*{nomeusuario}"
-						class="form-control maiusculo" />
-					<spam th:if="${#fields.hasErrors('nomeusuario')}"
-						class="label label-danger" th:errors="*{nomeusuario}">Incorrect
-					LP</spam>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="email" class="col-sm-2 control-label">Email</label>
-				<div class="col-sm-5">
-					<input type="email" th:field="*{email}"
-						class="form-control maiusculo" />
-					<spam th:if="${#fields.hasErrors('email')}"
-						class="label label-danger" th:errors="*{email}">Incorrect
-					LP</spam>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="senhaForm" class="col-sm-2 control-label">Senha</label>
-				<div class="col-sm-5">
-					<input type="password" th:field="*{senhaForm}"
-						class="form-control maiusculo" />
-					<spam th:if="${#fields.hasErrors('senhaForm')}"
-						class="label label-danger" th:errors="*{senhaForm}">Incorrect
-					LP</spam>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="confirmSenhaForm" class="col-sm-2 control-label">Comfirmar
-					senha</label>
-				<div class="col-sm-5">
-					<input type="password" th:field="*{confirmSenhaForm}"
-						class="form-control maiusculo" />
-					<spam th:if="${#fields.hasErrors('confirmSenhaForm')}"
-						class="label label-danger" th:errors="*{confirmSenhaForm}">Incorrect
-					LP</spam>
-				</div>
-			</div>
-			<input type="hidden" th:field="*{senha}" />
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Comfirmar</button>
-					<button type="reset" class="btn btn-default">Limpar</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div th:include="fragments/layout :: footer"></div>
+<head th:include="fragments/layout :: htmlhead" th:with="title='Início'">
+</head>
+<body ng-app="myApp">
+<div th:replace="fragments/layout :: navbar">(navbar)</div>
+<div class="container" ng-controller="AppController">
+    <div class="page-header">
+        <h1>Usuários</h1>
+    </div>
+    <div class="alert alert-info" role="alert"
+         ng-hide="usuarios &amp;&amp; usuarios.length > 0">Nenhum usuário cadastrado
+    </div>
+
+    <!--<form class="form-horizontal" role="form" ng-submit="addUsuario(newUsuario)">-->
+    <!--<div class="form-group" ng-repeat="usuario in usuarios">-->
+    <!--<div class="checkbox col-xs-9">-->
+    <!--<label> <input type="checkbox" ng-model="usuario.id" ng-change="updateUsuario(usuario)"/>-->
+    <!--{{usuario.nome}}-->
+    <!--</label>-->
+    <!--</div>-->
+    <!--<div class="col-xs-3">-->
+    <!--<button class="pull-right btn btn-danger" type="button"-->
+    <!--title="Delete" ng-click="deleteUsuario(usuario)">-->
+    <!--<span class="glyphicon glyphicon-trash"></span>-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<hr/>-->
+    <!--<div class="input-group">-->
+    <!--<input type="text" class="form-control" ng-model="newUsuario"-->
+    <!--placeholder="Entre com o nome do usuário"/> <span-->
+    <!--class="input-group-btn">-->
+    <!--<button class="btn btn-default" type="submit"-->
+    <!--ng-disabled="!newUsuario" title="Add">-->
+    <!--<span class="glyphicon glyphicon-plus"></span>-->
+    <!--</button>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--</form>-->
+
+    <form name="usuarioForm">
+        Usuario:{{usuario}}<p></p>
+        <!--Usuarios:{{usuarios}}-->
+        <input class="form-control" type="text" ng-model="usuario.nome" name="nome" placeholder="Nome"
+               ng-required="true" ng-minlength="10"/>
+        <input class="form-control" type="text" ng-model="usuario.nomeusuario" name="nomeusuario" placeholder="Usuário"
+               ng-required="true"/>
+        <select class="form-control" ng-model="usuario.permissoes"
+                ng-options="permissao.nomepermissao for permissao in permissoes | orderBy:'nomepermissao'">
+            <option value="">Selecione uma permissao</option>
+        </select>
+        <button class="btn btn-primary btn-block" ng-click="adicionarUsuario(usuario)"
+                ng-disabled="usuarioForm.$invalid">Adicionar usuário
+        </button>
+    </form>
+
+</div>
+
+<script type="text/javascript" src="/app/usuario/app.js"></script>
+<script type="text/javascript" src="/app/usuario/controllers.js"></script>
+<script type="text/javascript" src="/app/usuario/services.js"></script>
+
+<div th:include="fragments/layout :: footer"/>
 </body>
 </html>
